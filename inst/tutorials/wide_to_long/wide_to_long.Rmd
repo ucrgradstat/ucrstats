@@ -75,6 +75,34 @@ long
 
 To use this approach, make sure you have the `tidyr` package installed (which comes bundled in with `tidyverse`).
 
+The two functions we can use are going to be `pivot_longer()` and its inverse `pivot_wider()`.
+
+To achieve our desired dataframe, we are going to need to use both functions. Here is the documentation for both: 
+
+pivot_longer: https://tidyr.tidyverse.org/reference/pivot_longer.html
+
+pivot_wider: https://tidyr.tidyverse.org/reference/pivot_wider.html
+
+
+
+To complete this problem, we are going to need to specify a few arguments.
+
+For `pivot_longer()`:
+
+`cols` refer toi the specific columns we want to pivot. This should be all the columns that are not an ID
+
+`names_to` specifies what to name the new column that will be created. For example, column "v1/mean" refers to two attributes, a time and a statistic.
+
+`names_sep` details how the column names should be broken up. Is there a character we can use to separate the names? (Hint: What character separates the time and statistic?)
+
+For `pivot_wider()`:
+
+`names_from` describes which column to get the names from. This column will be from the resulting dataframe after you use `pivot_wider()`.
+
+`values_from` denotes the actual cell values. In this case, the values would be the actual numbers.
+
+See if you can fill in the blanks yourself:
+
 
 ```{r tidyverse, exercise = TRUE}
 library(tidyr)

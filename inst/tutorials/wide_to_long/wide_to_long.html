@@ -164,6 +164,19 @@ $(document).ready(function () {
 <div id="section-tidyverse-approach-using-tidyr" class="section level2">
 <h2>Tidyverse Approach using tidyr</h2>
 <p>To use this approach, make sure you have the <code>tidyr</code> package installed (which comes bundled in with <code>tidyverse</code>).</p>
+<p>The two functions we can use are going to be <code>pivot_longer()</code> and its inverse <code>pivot_wider()</code>.</p>
+<p>To achieve our desired dataframe, we are going to need to use both functions. Here is the documentation for both:</p>
+<p>pivot_longer: <a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="uri">https://tidyr.tidyverse.org/reference/pivot_longer.html</a></p>
+<p>pivot_wider: <a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="uri">https://tidyr.tidyverse.org/reference/pivot_wider.html</a></p>
+<p>To complete this problem, we are going to need to specify a few arguments.</p>
+<p>For <code>pivot_longer()</code>:</p>
+<p><code>cols</code> refer toi the specific columns we want to pivot. This should be all the columns that are not an ID</p>
+<p><code>names_to</code> specifies what to name the new column that will be created. For example, column “v1/mean” refers to two attributes, a time and a statistic.</p>
+<p><code>names_sep</code> details how the column names should be broken up. Is there a character we can use to separate the names? (Hint: What character separates the time and statistic?)</p>
+<p>For <code>pivot_wider()</code>:</p>
+<p><code>names_from</code> describes which column to get the names from. This column will be from the resulting dataframe after you use <code>pivot_wider()</code>.</p>
+<p><code>values_from</code> denotes the actual cell values. In this case, the values would be the actual numbers.</p>
+<p>See if you can fill in the blanks yourself:</p>
 <div class="tutorial-exercise" data-label="tidyverse" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>library(tidyr)
 wide %&gt;% tidyr::pivot_longer(cols= , names_to = c(), names_sep=) %&gt;% 
