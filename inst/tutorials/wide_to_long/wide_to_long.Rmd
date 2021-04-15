@@ -101,7 +101,7 @@ For `pivot_wider()`:
 
 `values_from` denotes the actual cell values. In this case, the values would be the actual numbers.
 
-See if you can fill in the blanks yourself:
+See if you can fill in the blanks yourself (make sure you install tidyr):
 
 
 ```{r tidyverse, exercise = TRUE}
@@ -112,8 +112,10 @@ wide %>% tidyr::pivot_longer(cols= , names_to = c(), names_sep=) %>%
 
 
 ```{r tidyverse-solution}
+library(tidyr)
 wide %>% tidyr::pivot_longer( `v1/mean`:`v4/median`, names_to = c("time","stat"), names_sep="/") %>% # pivot longer to separate vs from stat
-  pivot_wider(names_from = stat, values_from = value) -> new_long # Recreate stats using pivot wider
+  tidyr::pivot_wider(names_from = stat, values_from = value) -> new_long # Recreate stats using pivot wider
+new_long
 ```
 
 
