@@ -126,19 +126,19 @@ $(document).ready(function () {
 </div>
 <div id="section-the-long-data-format" class="section level2">
 <h2>The Long Data Format</h2>
-<p>In the long format, the unit of analysis (i.e. height and weight) are separated into two separate variables and are therefore given their own column.</p>
+<p>In the long format, the unit of analysis (for example, height and weight) are separated into separate variables and are therefore given their own column.</p>
 <p>Each row represents a single time point per subject, so multiple responses for the same subject will be given their own row.</p>
-<p>A long dataset will have more rows than its wide dataset counterpart, but will have less columns.</p>
+<p>Generally, most of the datasets you work with in R will be in the long format.</p>
 <div class="figure">
-<img src="images/long.PNG" alt="Figure 1: A simple example of long data" />
-<p class="caption">Figure 1: A simple example of long data</p>
+<img src="images/long.PNG" alt="Figure 1: A simple example of long data. Notice how a column exists to distinguish between the years" />
+<p class="caption">Figure 1: A simple example of long data. Notice how a column exists to distinguish between the years</p>
 </div>
 </div>
 <div id="section-the-wide-data-format" class="section level2">
 <h2>The Wide Data Format</h2>
 <div class="figure">
-<img src="images/wide.PNG" alt="Figure 2: A simple example of wide data" />
-<p class="caption">Figure 2: A simple example of wide data</p>
+<img src="images/wide.PNG" alt="Figure 2: A simple example of wide data. Notice how the years are each given their own rows for each person" />
+<p class="caption">Figure 2: A simple example of wide data. Notice how the years are each given their own rows for each person</p>
 </div>
 </div>
 <div id="section-tidyverse-approach-using-tidyr" class="section level2">
