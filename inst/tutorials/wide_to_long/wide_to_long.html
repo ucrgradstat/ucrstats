@@ -190,11 +190,22 @@ wide %&gt;% tidyr::pivot_longer(cols= , names_to = c(), names_sep=) %&gt;%
 </div>
 <div id="section-base-r-approach-using-reshape" class="section level2">
 <h2>Base R Approach using <code>reshape</code></h2>
+<p>A non tidyverse approach to solve the same problem can be done using the <code>reshape()</code> function that comes built in with R.</p>
+<p>Here is the documentation for it: <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/reshape" class="uri">https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/reshape</a></p>
+<p>You’ll need to fill in the following arguments to get the desired result:</p>
+<p><code>idvar</code> is the name of the column that is used to identify each of the subjects. In this case, we can use the subject IDs.</p>
+<p><code>sep</code> is a character that can be used to distinguish between two variable names in the wide format. It should be the same as <code>names_sep</code> from the tidyr example.</p>
+<p><code>v.names</code> asks for a vector containing the names of the new columns you want to create. In our case, we need a column for each of the three statistics.</p>
+<p><code>timevar</code> is the name of the column that will hold the categorical attribute of our subject. We can leave it as “time” for now.</p>
+<p><code>times</code> refers to the possible values the categorical obsvervation can take. In our case, we have four possible time values, so we’ll need to pass in a vector with their names.<br />
+</p>
+<p><code>varying</code> requires a list of names of sets of variables in the wide format that correspond to single variables in long format. We can gather these names by searching for them using the “grep” function. You just need to fill in what names we are looking for.</p>
+<p>See if you can fill in the missing arguments:</p>
 <div class="tutorial-exercise" data-label="base_r" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code># Covert our table ot a dataframe using as.data.frame
+<pre class="text"><code># Covert our table to a dataframe using as.data.frame so that it works with reshape
 in_data &lt;- as.data.frame(wide) 
 
-to_long &lt;- reshape(data = in_data, direction = &quot;long&quot;, idvar = &quot;ID1&quot;, sep =&quot;/&quot;, v.names = , 
+to_long &lt;- reshape(data = in_data, direction = &quot;long&quot;, idvar = &quot;&quot;, sep =&quot;&quot;, v.names = , 
                    timevar = &quot;time&quot;, times =,
                    varying = list(grep(, colnames(in_data), value=T), grep(, colnames(in_data), value=T), grep(, colnames(in_data), value=T)))
 

@@ -119,11 +119,33 @@ wide %>% tidyr::pivot_longer( `v1/mean`:`v4/median`, names_to = c("time","stat")
 
 ## Base R Approach using `reshape`
 
+A non tidyverse approach to solve the same problem can be done using the `reshape()` function that comes built in with R.
+
+Here is the documentation for it: https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/reshape
+
+You'll need to fill in the following arguments to get the desired result:
+
+
+`idvar` is the name of the column that is used to identify each of the subjects. In this case, we can use the subject IDs.
+
+`sep` is a character that can be used to distinguish between two variable names in the wide format. It should be the same as `names_sep` from the tidyr example.
+
+`v.names` asks for a vector containing the names of the new columns you want to create. In our case, we need a column for each of the three statistics.
+
+`timevar` is the name of the column that will hold the categorical attribute of our subject. We can leave it as "time" for now.
+
+`times` refers to the possible values the categorical obsvervation can take. In our case, we have four possible time values, so we'll need to pass in a vector with their names.\
+
+`varying` requires a list of names of sets of variables in the wide format that correspond to single variables in long format. We can gather these names by searching for them using the "grep" function. You just need to
+fill in what names we are looking for.
+
+See if you can fill in the missing arguments:
+
 ```{r base_r, exercise = TRUE}
-# Covert our table ot a dataframe using as.data.frame
+# Covert our table to a dataframe using as.data.frame so that it works with reshape
 in_data <- as.data.frame(wide) 
 
-to_long <- reshape(data = in_data, direction = "long", idvar = "ID1", sep ="/", v.names = , 
+to_long <- reshape(data = in_data, direction = "long", idvar = "", sep ="", v.names = , 
                    timevar = "time", times =,
                    varying = list(grep(, colnames(in_data), value=T), grep(, colnames(in_data), value=T), grep(, colnames(in_data), value=T)))
 
