@@ -9,25 +9,26 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(learnr)
-```
 
-
-## Loading Data
-
-```{r}
 # Load in the datasets
-load("~/UCR/SMART - Christian/Data/long.RData")
-load("~/UCR/SMART - Christian/Data/wide.RData")
-head(long)
-head(wide)
+
+curr_dir <- dirname(dirname(dirname(getwd())))
+
+load( paste0(curr_dir, "/data/long.RData") )
+load( paste0(curr_dir, "/data/wide.RData") )
+#load("ucrstats/data/long.RData")
 ```
+
+
 
 
 ## Tidyverse
 
 
 ```{r tidyverse, exercise = TRUE}
-
+library(tidyr)
+wide %>% tidyr::pivot_longer( , names_to = c(), names_sep=) %>% 
+  pivot_wider(names_from = , values_from = ) -> new_long 
 ```
 
 
