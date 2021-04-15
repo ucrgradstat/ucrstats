@@ -1,0 +1,66 @@
+---
+title: "Smart Week 2"
+author: "Christian Duenas"
+date: "4/6/2021"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(learnr)
+```
+
+
+## Loading Data
+
+```{r}
+# Load in the datasets
+load("~/UCR/SMART - Christian/Data/long.RData")
+load("~/UCR/SMART - Christian/Data/wide.RData")
+head(long)
+head(wide)
+```
+
+
+## Tidyverse
+
+
+```{r tidyverse, exercise = TRUE}
+
+```
+
+
+```{r tidyverse-solution}
+# Tidyr method
+library(tidyr)
+wide %>% tidyr::pivot_longer( `v1/mean`:`v4/median`, names_to = c("time","stat"), names_sep="/") %>% # pivot longer to separate vs from stat
+  pivot_wider(names_from = stat, values_from = value) -> new_long # Recreate stats using pivot wider
+
+# head(new_long)
+
+# Verify dataframes are equal
+# all.equal(new_long, long)
+```
+
+
+## Base R
+
+```{r base_r, exercise = TRUE}
+
+```
+
+
+```{r base_r-solution}
+# Covert using as.data.frame
+in_data <- as.data.frame(wide) 
+# Use reshape to covert from wide to long
+to_long <- reshape(data = in_data, direction = "long", idvar = "ID1", sep ="/", v.names = c("mean", "sd", "median"), timevar = "time", times =c("v1", "v2", "v3", "v4"),
+        varying = list(grep("mean", colnames(in_data), value=T), grep("sd", colnames(in_data), value=T), grep("median", colnames(in_data), value=T)))
+# remove the rownames 
+rownames(to_long) <- c()
+# to_long
+
+# to_long %>% filter(ID1 == "Ad9131ee9") # check
+```
+
