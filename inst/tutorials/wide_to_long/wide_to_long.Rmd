@@ -1,5 +1,5 @@
 ---
-title: "Smart Week 2"
+title: "UCR Statistics"
 author: "Christian Duenas"
 date: "4/6/2021"
 output: learnr::tutorial
@@ -58,7 +58,7 @@ There may be certain situations where you are given a dataset, but need to conve
 
 This tutorial will detail how to transition wide data to long data, but you can also use these tools to transition from long data to wide.
 
-We will make the following dataset titled "wide"
+We will make the following wide dataset named `wide` (which is shown below)
 
 ```{r}
 wide
@@ -95,8 +95,11 @@ wide %>% tidyr::pivot_longer( `v1/mean`:`v4/median`, names_to = c("time","stat")
 # Covert our table ot a dataframe using as.data.frame
 in_data <- as.data.frame(wide) 
 
-to_long <- reshape(data = in_data, direction = "long", idvar = "ID1", sep ="/", v.names = , timevar = "time", times =,
-        varying = list(grep(, colnames(in_data), value=T), grep(, colnames(in_data), value=T), grep(, colnames(in_data), value=T)))
+to_long <- reshape(data = in_data, direction = "long", idvar = "ID1", sep ="/", v.names = , 
+                   timevar = "time", times =,
+                   varying = list(grep(, colnames(in_data), value=T), grep(, colnames(in_data), value=T), grep(, colnames(in_data), value=T)))
+
+to_long # Print the result
 ```
 
 
