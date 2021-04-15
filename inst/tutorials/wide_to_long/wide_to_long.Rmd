@@ -161,7 +161,7 @@ in_data <- as.data.frame(wide)
 # Use reshape to covert from wide to long
 to_long <- reshape(data = in_data, direction = "long", idvar = "ID1", sep ="/", v.names = c("mean", "sd", "median"), timevar = "time", times =c("v1", "v2", "v3", "v4"),
         varying = list(grep("mean", colnames(in_data), value=T), grep("sd", colnames(in_data), value=T), grep("median", colnames(in_data), value=T)))
-# remove the rownames 
-rownames(to_long) <- c()
+
+to_long
 ```
 
