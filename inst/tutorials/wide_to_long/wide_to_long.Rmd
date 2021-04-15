@@ -36,6 +36,8 @@ In the long format, the unit of analysis (for example, height and weight) are se
 
 Each row represents a single time point per subject, so multiple responses for the same subject will be given their own row.
 
+Because of this, data in the long format will generally have more rows than its wide format counterpart
+
 Generally, most of the datasets you work with in R will be in the long format.
 
 ![Figure 1: A simple example of long data. Notice how a column exists to distinguish between the years](images/long.png)
@@ -44,14 +46,39 @@ Generally, most of the datasets you work with in R will be in the long format.
 
 ## The Wide Data Format
 
-![Figure 2: A simple example of wide data. Notice how the years are each given their own rows for each person](images/wide.png)
+In the wide format, a subjects repeated responses will be in a single row. This will "group" all of the categorical data according to the subject.
+
+Because of this, data in the wide format will generally have less rows than its long format counterpart
+
+![Figure 2: A simple example of wide data. Notice how the years are each given their own rows for each university](images/wide.png)
+
+## Converting between formats
+
+There may be certain situations where you are given a dataset, but need to convert it into a different format. This can be done using the `tidyr` package in R (which is part of the `tidyverse` collection), or by using the `reshape()` function in base R. 
+
+This tutorial will detail how to transition wide data to long data, but you can also use these tools to transition from long data to wide.
+
+We will make the following dataset titled "wide"
+
+```{r}
+wide
+```
+
+Into the long format where a column is used to keep track of the time period
+
+```{r}
+long
+```
+
 
 ## Tidyverse Approach using tidyr
+
+To use this approach, make sure you have the `tidyr` package installed (which comes bundled in with `tidyverse`).
 
 
 ```{r tidyverse, exercise = TRUE}
 library(tidyr)
-wide %>% tidyr::pivot_longer( , names_to = c(), names_sep=) %>% 
+wide %>% tidyr::pivot_longer(cols= , names_to = c(), names_sep=) %>% 
   pivot_wider(names_from = , values_from = ) -> new_long 
 ```
 
@@ -65,7 +92,11 @@ wide %>% tidyr::pivot_longer( `v1/mean`:`v4/median`, names_to = c("time","stat")
 ## Base R Approach using `reshape`
 
 ```{r base_r, exercise = TRUE}
+# Covert our table ot a dataframe using as.data.frame
+in_data <- as.data.frame(wide) 
 
+to_long <- reshape(data = in_data, direction = "long", idvar = "ID1", sep ="/", v.names = , timevar = "time", times =,
+        varying = list(grep(, colnames(in_data), value=T), grep(, colnames(in_data), value=T), grep(, colnames(in_data), value=T)))
 ```
 
 
@@ -77,8 +108,5 @@ to_long <- reshape(data = in_data, direction = "long", idvar = "ID1", sep ="/", 
         varying = list(grep("mean", colnames(in_data), value=T), grep("sd", colnames(in_data), value=T), grep("median", colnames(in_data), value=T)))
 # remove the rownames 
 rownames(to_long) <- c()
-# to_long
-
-# to_long %>% filter(ID1 == "Ad9131ee9") # check
 ```
 
