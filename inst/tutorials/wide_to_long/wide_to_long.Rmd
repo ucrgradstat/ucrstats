@@ -12,17 +12,41 @@ library(learnr)
 
 # Load in the datasets
 
-curr_dir <- dirname(dirname(dirname(getwd())))
+root_dir <- dirname(dirname(dirname(getwd())))
 
-load( paste0(curr_dir, "/data/long.RData") )
-load( paste0(curr_dir, "/data/wide.RData") )
+
+load( paste0(root_dir, "/data/long.RData") )
+load( paste0(root_dir, "/data/wide.RData") )
 #load("ucrstats/data/long.RData")
 ```
 
+# Converting Data from Wide To Long
 
 
 
-## Tidyverse
+## Introduction
+
+In this tutorial, we'll be discussing the difference between wide data and long data. We'll also see how we can transition from wide to long using both the `tidyr` package as well as base R.
+
+First, lets take a look at each format and how they differ.
+
+## The Long Data Format
+
+In the long format, the unit of analysis (i.e. height and weight) are separated into two separate variables and are therefore given their own column.
+
+Each row represents a single time point per subject, so multiple responses for the same subject will be given their own row.
+
+A long dataset will have more rows than its wide dataset counterpart, but will have less columns.
+
+![Figure 1: A simple example of long data](images/long.png)
+
+
+
+## The Wide Data Format
+
+![Figure 2: A simple example of wide data](images/wide.png)
+
+## Tidyverse Approach using tidyr
 
 
 ```{r tidyverse, exercise = TRUE}
@@ -33,19 +57,12 @@ wide %>% tidyr::pivot_longer( , names_to = c(), names_sep=) %>%
 
 
 ```{r tidyverse-solution}
-# Tidyr method
-library(tidyr)
 wide %>% tidyr::pivot_longer( `v1/mean`:`v4/median`, names_to = c("time","stat"), names_sep="/") %>% # pivot longer to separate vs from stat
   pivot_wider(names_from = stat, values_from = value) -> new_long # Recreate stats using pivot wider
-
-# head(new_long)
-
-# Verify dataframes are equal
-# all.equal(new_long, long)
 ```
 
 
-## Base R
+## Base R Approach using `reshape`
 
 ```{r base_r, exercise = TRUE}
 
