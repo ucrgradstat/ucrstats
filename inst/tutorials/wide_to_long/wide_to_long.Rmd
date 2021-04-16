@@ -40,7 +40,7 @@ Because of this, data in the long format will generally have more rows than its 
 
 Generally, most of the datasets you work with in R will be in the long format.
 
-![Figure 1: A simple example of long data. Notice how a column exists to distinguish between the years](images/long.png)
+![Figure 1: A simple example of long data. Notice how a column exists to distinguish between the years](images/long.PNG)
 
 
 
@@ -50,7 +50,7 @@ In the wide format, a subjects repeated responses will be in a single row. This 
 
 Because of this, data in the wide format will generally have less rows than its long format counterpart
 
-![Figure 2: A simple example of wide data. Notice how the years are each given their own rows for each university](images/wide.png)
+![Figure 2: A simple example of wide data. Notice how the years are each given their own rows for each university](images/wide.PNG)
 
 ## Converting between formats
 
