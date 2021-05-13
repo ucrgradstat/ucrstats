@@ -9,7 +9,7 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(learnr)
-library(ucrstats) # When working on the tutorial, use your code below and comment this entire line.
+#library(ucrstats) # When working on the tutorial, use your code below and comment this entire line.
 
 # For deployment purposes, have the package load the data instead. 
 
