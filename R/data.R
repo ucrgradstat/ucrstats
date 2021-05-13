@@ -1,4 +1,4 @@
-#' A simulated dataset used to represent long data.
+#' A simulated data set used to represent long data.
 #'
 #'
 #' @format A data frame with 4000 rows and 5 variables:
@@ -13,7 +13,7 @@
 #'
 "long"
 
-#' A simulated dataset used to represent wide data.
+#' A simulated data set used to represent wide data.
 #'
 #'
 #' @format A data frame with 1000 rows and 13 variables:
@@ -38,3 +38,60 @@
 #'  
 #'
 "wide"
+
+#' A simulated data set used to demonstrate how to fit a linear mixed-effects model with lme4. There are 500 participants. Each participants has up to 25 repeated measurements recorded.
+#'
+#'
+#' @format A data frame with 6720 rows and 7 variables:
+#' \describe{
+#'   \item{id}{An ID variable grouping the repeated measurements}
+#'   \item{time_id}{time point values}
+#'   \item{Y}{Outcome}
+#'   \item{X1}{Predictor Variable X1}
+#'   \item{X2}{Predictor Variable X2}
+#'   \item{X3}{Predictor Variable X3}
+#'   \item{X4}{Predictor Variable X4}
+#'  }
+#'  
+#'
+"lme_one"
+
+
+#' A simulated data set used to demonstrate how to fit a linear mixed-effects model with lme4. There are 1000 participants. Each participants has up to 25 repeated measurements recorded.
+#'
+#'
+#' @format A data frame with 13184 rows and 8 variables:
+#' \describe{
+#'   \item{id}{An ID variable grouping the repeated measurements}
+#'   \item{time_id}{time point values}
+#'   \item{Y}{Outcome}
+#'   \item{X1}{Predictor Variable X1}
+#'   \item{X2}{Predictor Variable X2}
+#'   \item{X3}{Predictor Variable X3}
+#'   \item{X4}{Predictor Variable X4}
+#'   \item{X5}{Predictor Variable X5}
+#'  }
+#'  
+#'
+"lme_two"
+
+#' A simulated data set used to demonstrate how to fit a linear mixed-effects model with lme4. There are 1000 participants. Each participants has up to 25 repeated measurements recorded.
+#'
+#'
+#' @format A data frame with 13643 rows and 8 variables:
+#' \describe{
+#'   \item{id}{An ID variable grouping the repeated measurements}
+#'   \item{time_id}{time point values}
+#'   \item{Y}{Outcome}
+#'   \item{X1}{Predictor Variable X1}
+#'   \item{X2}{Predictor Variable X2}
+#'   \item{X3}{Predictor Variable X3}
+#'   \item{X4}{Predictor Variable X4}
+#'   \item{X5}{Predictor Variable X5}
+#'  }
+#'  
+#'
+"lme_three"
+
+
+
