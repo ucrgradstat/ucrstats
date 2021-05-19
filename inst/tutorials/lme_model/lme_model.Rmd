@@ -20,19 +20,35 @@ root_dir <- dirname(dirname(dirname(getwd())))
 
 # # Load in the data 
 load( paste0(root_dir, "/data/lme_one.RData") )
-
+lme_one$id <- as.factor(lme_one$id)
 ```
 
 # Linear Mixed Effects Models 
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 library(lme4)
-head(lme_one)
+#head(lme_one)
 ```
 
 ## Introduction 
 
 ### Why Linear Mixed Effects
+
+Up to this point, you've likely been using linear models to model your data. Perhaps it looks something like 
+
+$Y = \beta X + \epsilon$
+
+But when you create this model, there's a very important assumption you're making: linear models require that the data be **independent**. 
+
+Sometimes it's safe to assume independence. In those cases, you're good to go. But what if it's not? 
+
+Consider a longitudinal study where we are following children with some sort of rare disease as they grow older. In this scenario, each child will contribute multiple data points as time passes (we'll call these **replications**). Replications coming from the same person will likely be correlated, so it's no longer safe to assume independence meaning that our linear models is longer be appropriate to use. This is where *Linear Mixed Effect Models* (or *LME*) come to the rescue.
+
+LMEs utilize **fixed** and **random** effects.
+
+**Fixed Effects** - A parameter that does not differ from person to person (can be thought of as an independent variable).
+
+**Random Effects** - A parameter that does vary from person to person. These are treated as random variables, and are assumed to follow some sort of distribution (i.e. the Normal Distribution)
 
 
 ## Estimating Parameters
@@ -44,18 +60,54 @@ head(lme_one)
 
 ## Fitting the Model Using R
 
+Lucky for us, the `lme4` package makes it so that building a LME model in R is not too different from creating a linear model using `lm`.
+
+Lets take a look at our simulated data which is stored in the dataframe named `lme_one`
+
 
 ```{r}
-
+lme_one
 ```
 
+We can fit an LME with just an intercept using the `lmer` function from the `lme4` package. Here's a simple intercept model
+
+```{r intercept, exercise = TRUE}
+# Use the lme_one function to create a model
+intercept_model <-  lme4::lmer(data = lme_one, formula = Y ~ 1 + (1 | id))
+# Use summary to get a quick overview of that model
+summary(intercept_model)
+```
+
+This model has two terms: a fixed effect intercept and a random effects intercept.
+
+### Adding Fixed and Random Effects
+
+Now lets build on this model and add some variables from our data. Suppose we want to X1 to our model as a fixed effect. See if you can fill in the following code to build that model.
+
+Hint: Think about how you would add a coefficent to the model using `lm()`
 
 
+```{r firstLME, exercise = TRUE}
+my_model <- lme4::lmer(data = lme_one, formula = Y ~ 1)
+summary(my_model)
+```
 
+```{r firstLME-solution}
+my_model <- lme4::lmer(data = lme_one, formula = Y ~ X1 + (1 | id))
+summary(my_model)
+```
 
+Let's keep building on this model. Now suppose that you want to add the time as a coefficent (the `time_id` column). It makes sense to think that observations within a subject at one time point is likely to be correlated with another time point for that same subject. So let's make time a randome effect. 
 
+```{r randomeMLE, exercise = TRUE}
+my_model <- lme4::lmer(data = lme_one, formula = Y ~ 1 + (1 | id) )
+summary(my_model)
+```
 
-
+```{r randomeMLE-solution}
+my_model <- lme4::lmer(data = lme_one, formula = Y ~ X1 + time_id + (1 + time_id | id)  )
+summary(my_model)
+```
 
 
 
