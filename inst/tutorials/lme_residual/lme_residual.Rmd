@@ -7,6 +7,17 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 library(learnr)
 knitr::opts_chunk$set(echo = FALSE)
+#library(ucrstats) # When working on the tutorial, use your code below and comment this entire line.
+
+# For deployment purposes, have the package load the data instead. 
+
+# #Load in the psthway to the datasets
+
+root_dir <- dirname(dirname(dirname(getwd())))
+
+# # Load in the data 
+load( paste0(root_dir, "/data/lme_one.RData") )
+lme_one$id <- as.factor(lme_one$id)
 ```
 
 
