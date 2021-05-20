@@ -128,10 +128,28 @@ $(document).ready(function () {
 <p>But when you create this model, there’s a very important assumption you’re making: linear models require that the data be <strong>independent</strong>.</p>
 <p>Sometimes it’s safe to assume independence. In those cases, you’re good to go. But what if it’s not?</p>
 <p>Consider a longitudinal study where we are following children with some sort of rare disease as they grow older. In this scenario, each child will contribute multiple data points as time passes (we’ll call these <strong>replications</strong>). Replications coming from the same person will likely be correlated, so it’s no longer safe to assume independence meaning that our linear models is longer be appropriate to use. This is where <em>Linear Mixed Effect Models</em> (or <em>LME</em>) come to the rescue.</p>
+<div class="figure">
+<img src="images/ex.PNG" alt="Figure 1: A simple scatter plot. Notice how the data looks grouped" />
+<p class="caption">Figure 1: A simple scatter plot. Notice how the data looks grouped</p>
+</div>
+<div class="figure">
+<img src="images/ex1.PNG" alt="Figure 2: If we attach a adjust a line to each person, we get a better idea of what trends exist" />
+<p class="caption">Figure 2: If we attach a adjust a line to each person, we get a better idea of what trends exist</p>
+</div>
+</div>
+</div>
+<div id="section-the-model" class="section level2">
+<h2>The Model</h2>
+<p>Our model can be expressed as <span class="math inline">\(Y_{i} = X_{i}&#39;\beta + Z_{i}b_i + \epsilon_{ij}\)</span> where</p>
+<p><span class="math inline">\(Y_{ij}\)</span> is the response</p>
+<p><span class="math inline">\(X_{i}\)</span> is the design matrix of fixed effect covariates</p>
+<p><span class="math inline">\(Z_{i}\)</span> is the design matrix of random effects covariates, usually a subset of <span class="math inline">\(X_i\)</span></p>
+<p><span class="math inline">\(\beta\)</span> is a vector of the fixed-effects regression coefficients</p>
+<p><span class="math inline">\(b_i\)</span> is vector of the random-effects regression coefficients</p>
+<p><span class="math inline">\(\epsilon_{ij}\)</span> - a vector of errors</p>
 <p>LMEs utilize <strong>fixed</strong> and <strong>random</strong> effects.</p>
 <p><strong>Fixed Effects</strong> - A parameter that does not differ from person to person (can be thought of as an independent variable).</p>
 <p><strong>Random Effects</strong> - A parameter that does vary from person to person. These are treated as random variables, and are assumed to follow some sort of distribution (i.e. the Normal Distribution)</p>
-</div>
 </div>
 <div id="section-estimating-parameters" class="section level2">
 <h2>Estimating Parameters</h2>

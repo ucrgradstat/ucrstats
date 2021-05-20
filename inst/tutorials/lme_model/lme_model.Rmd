@@ -44,6 +44,26 @@ Sometimes it's safe to assume independence. In those cases, you're good to go. B
 
 Consider a longitudinal study where we are following children with some sort of rare disease as they grow older. In this scenario, each child will contribute multiple data points as time passes (we'll call these **replications**). Replications coming from the same person will likely be correlated, so it's no longer safe to assume independence meaning that our linear models is longer be appropriate to use. This is where *Linear Mixed Effect Models* (or *LME*) come to the rescue.
 
+![Figure 1: A simple scatter plot. Notice how the data looks grouped](images/ex.PNG)
+
+![Figure 2: If we attach a adjust a line to each person, we get a better idea of what trends exist](images/ex1.PNG)
+
+## The Model
+
+Our model can be expressed as $Y_{i} = X_{i}'\beta + Z_{i}b_i + \epsilon_{ij}$ where
+
+$Y_{ij}$ is the response
+
+$X_{i}$ is the design matrix of fixed effect covariates
+
+$Z_{i}$ is the design matrix of random effects covariates, usually a subset of $X_i$
+
+$\beta$ is a vector of the fixed-effects regression coefficients
+
+$b_i$ is vector of the random-effects regression coefficients
+
+$\epsilon_{ij}$ - a vector of errors
+
 LMEs utilize **fixed** and **random** effects.
 
 **Fixed Effects** - A parameter that does not differ from person to person (can be thought of as an independent variable).
