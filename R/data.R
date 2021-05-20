@@ -31,9 +31,6 @@
 #'   \item{v4/mean}{Variable representing the mean at time point 4}
 #'   \item{v4/median}{Variable representing the median at time point 4}
 #'   \item{v4/sd}{Variable representing the sd at time point 4}
-
-
-
 #'  }
 #'  
 #'

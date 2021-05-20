@@ -3,7 +3,7 @@
 \docType{data}
 \name{long}
 \alias{long}
-\title{A simulated dataset used to represent long data.}
+\title{A simulated data set used to represent long data.}
 \format{
 A data frame with 4000 rows and 5 variables:
 \describe{
@@ -18,6 +18,6 @@ A data frame with 4000 rows and 5 variables:
 long
 }
 \description{
-A simulated dataset used to represent long data.
+A simulated data set used to represent long data.
 }
 \keyword{datasets}
