@@ -3,7 +3,7 @@
 \docType{data}
 \name{wide}
 \alias{wide}
-\title{A simulated dataset used to represent wide data.}
+\title{A simulated data set used to represent wide data.}
 \format{
 A data frame with 1000 rows and 13 variables:
 \describe{
@@ -26,6 +26,6 @@ A data frame with 1000 rows and 13 variables:
 wide
 }
 \description{
-A simulated dataset used to represent wide data.
+A simulated data set used to represent wide data.
 }
 \keyword{datasets}

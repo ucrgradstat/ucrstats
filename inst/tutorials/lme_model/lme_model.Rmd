@@ -8,19 +8,18 @@ runtime: shiny_prerendered
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-
 library(learnr)
-#library(ucrstats) # When working on the tutorial, use your code below and comment this entire line.
+library(ucrstats) # When working on the tutorial, use your code below and comment this entire line.
 
 # For deployment purposes, have the package load the data instead. 
 
-# #Load in the psthway to the datasets
-
-root_dir <- dirname(dirname(dirname(getwd())))
-
-# # Load in the data 
-load( paste0(root_dir, "/data/lme_one.RData") )
-lme_one$id <- as.factor(lme_one$id)
+# # #Load in the psthway to the datasets
+# 
+# root_dir <- dirname(dirname(dirname(getwd())))
+# 
+# # # Load in the data 
+# load( paste0(root_dir, "/data/lme_one.RData") )
+# lme_one$id <- as.factor(lme_one$id)
 ```
 
 # Linear Mixed Effects Models 
@@ -116,7 +115,7 @@ This model has two terms: a fixed effect intercept and a random effects intercep
 
 The fixed part of the formula is the `1`. This tells the function to create an intercept. The random effects part of the formula is `(1 | id)`. This creates a random intercept term based on each subject in the data. You can see the idea demonstrated with this plot.
 
-![](images/ex3.PNG)
+![](images/ex3.png)
 
 ### Adding Fixed and Random Effects
 

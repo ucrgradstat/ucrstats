@@ -1,5 +1,6 @@
 ---
-title: "Tutorial"
+title: "Linear Mixed Effects Residual Analysis"
+author: "Christian Duenas"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
@@ -7,16 +8,16 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 library(learnr)
 knitr::opts_chunk$set(echo = FALSE)
-#library(ucrstats) # When working on the tutorial, use your code below and comment this entire line.
+library(ucrstats) # When working on the tutorial, use your code below and comment this entire line.
 
-# For deployment purposes, have the package load the data instead. 
-
-# #Load in the psthway to the datasets
-
-root_dir <- dirname(dirname(dirname(getwd())))
-
-# # Load in the data 
-load( paste0(root_dir, "/data/lme_two.RData") )
+# # For deployment purposes, have the package load the data instead. 
+# 
+# # #Load in the psthway to the datasets
+# 
+# root_dir <- dirname(dirname(dirname(getwd())))
+# 
+# # # Load in the data 
+# load( paste0(root_dir, "/data/lme_two.RData") )
 lme_two$id <- as.factor(lme_two$id)
 
 
@@ -50,7 +51,7 @@ Our aim in transforming the resiudals is to "de-correlate" them that they have z
 
 To transform the residuals, we'll use the Cholesky decompostion of $\hat{\Sigma}_i = L_iL_i'$
 
-![](images/cholesky.PNG)
+![](images/Cholesky.png)
 
 + $\hat{\Sigma}_i$ is a positive-definite matrix
 
