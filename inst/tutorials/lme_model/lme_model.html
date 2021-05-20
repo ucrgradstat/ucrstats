@@ -165,7 +165,16 @@ $(document).ready(function () {
 </div>
 <div id="section-restricted-maximum-likelihood-function" class="section level3">
 <h3>Restricted Maximum Likelihood Function</h3>
+<p>There is a slight problem when estimating our covariance term <span class="math inline">\(\Sigma_i\)</span> using the Maximum Likelhihod method: the result will be biased, especially in small samples. To remedy this, we’re going to use what is called the Restricted Maximum Likelihood Estimate of <span class="math inline">\(\Sigma_i\)</span>. This is obtained by maximizing the following modified log-likelihood function:</p>
 <p><span class="math inline">\(-\frac{1}{2}\log(\Sigma_{i}) -\frac{1}{2}\sum_{i=1} (y_i - X_i\hat{\beta})&#39; \Sigma_{i}^{-1} (y_i - X_i\hat{\beta}) -\frac{1}{2}\log(\sum_{i=1} X_i&#39;\Sigma_{i}^{-1}X_i)\)</span></p>
+<p>We won’t delve too deep into the math, but the general idea is that when we perform a REML estimate of <span class="math inline">\(\Sigma_i\)</span>, we remove all of the <span class="math inline">\(\beta\)</span> terms so that we have a function with only one variable to maximize. Once we have our REML estimate <span class="math inline">\(\hat\Sigma_i\)</span>, we can then go back and solve for <span class="math inline">\(\beta\)</span> using our normal; generalized least squares estimate.</p>
+</div>
+<div id="section-best-linear-unbiased-estimator-blup" class="section level3">
+<h3>Best Linear Unbiased Estimator (BLUP)</h3>
+<p>For our fixed parameters, we use the term “estimate”. But <span class="math inline">\(b_i\)</span> is technically a random variable, so we’re going to “predict” its value rather than estimate it. Predicting a random variable is essentially pedicting it’s conditional mean, so we can get a good prediction of <span class="math inline">\(b_i\)</span> using:</p>
+<p><span class="math inline">\(E(b_i|Y_i) = GZ&#39;\Sigma_{i}^{-1}(Y_i-Xi\hat{\beta})\)</span>, where <span class="math inline">\(\Sigma_{i} = Cov(Y_i) = Z_IGZ_i&#39; + R_i\)</span></p>
+<p>If we use our REML estimate for the covaraince parameter, we call this the predictor the “empirical BLUP”</p>
+<p><span class="math inline">\(\hat{b_i} = \hat{G}Z&#39;\hat\Sigma_{i}^{-1}(Y_i-Xi\hat{\beta})\)</span></p>
 </div>
 </div>
 <div id="section-fitting-the-model-using-r" class="section level2">
