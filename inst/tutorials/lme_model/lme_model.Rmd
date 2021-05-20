@@ -45,13 +45,13 @@ Consider a longitudinal study where we are following children with some sort of 
 
 Let's illustrate another point. Suppose we have data from 3 individuals that look like this
 
-![](images/ex.PNG)
+![](images/ex.png)
 
 What are some of the different ways we could interpret this data?
 
-![If we look within each person, the points seem to have a positive trend.](images/ex1.PNG)
+![If we look within each person, the points seem to have a positive trend.](images/ex1.png)
 
-![If we look between each person, the trend seems to be negative](images/ex2.PNG)
+![If we look between each person, the trend seems to be negative](images/ex2.png)
 
 If we fit a line to this data using normal methods, we'd lose this aspect of the data and would likely get a poor fit. The power of LMEs is that they act as a middleground between the two plots above and can offer insight into both trends.
 
@@ -59,13 +59,13 @@ If we fit a line to this data using normal methods, we'd lose this aspect of the
 
 LMEs utilize **fixed** and **random** effects.
 
-+ **Fixed Effects** - A parameter that does not differ from person to person (can be thought of as an independent variable).
++ **Fixed Effects** - A parameter that does not differ from person to person (can be thought of as population effects).
 
 + **Random Effects** - A parameter that does vary from person to person. These are treated as random variables, and are assumed to follow some sort of distribution (i.e. the Normal Distribution)
 
-With that in mind, our model can be expressed as $Y_{i} = X_{i}'\beta + Z_{i}b_i + \epsilon_{ij}$ where
+With that in mind, our model for an ith individual can be expressed as $Y_{i} = X_{i}'\beta + Z_{i}b_i + \epsilon_{ij}$ where
 
-$Y_{ij}$ is the response
+$Y_{i}$ is the response vector 
 
 $X_{i}$ is the design matrix of fixed effect covariates
 
@@ -73,12 +73,15 @@ $\beta$ is a vector of the fixed-effects regression coefficients
 
 $Z_{i}$ is the design matrix of random effects covariates, usually a subset of $X_i$
 
-$b_i$ is vector of the random-effects regression coefficients. It is treated as a random variable.
+$b_i$ is a vector of the random-effects regression coefficients. It is treated as a random variable.
 
-$\epsilon_{ij}$ - is a vector of errors
+$\epsilon_{i}$ - is a vector of errors
 
+### The Covariance Matrix
 
+"Light Intro"
 
+Separation between random covar and error covar
 
 ## Estimating Parameters
 
@@ -86,7 +89,7 @@ $\epsilon_{ij}$ - is a vector of errors
 
 Maximum Likelihood is technique to estimate parameters by using the fixed data points and finding a value for the estimate that has the highest chance of being observed. This is done by maximizing what is known as the "likelihood function."
 
-$\sum_{i=1}(y_i - X_i \beta)'\Sigma_i^{-1}(y_i - X_i \beta)$
+$\sum_{i=1}(Y_i - X_i \beta)'\Sigma_i^{-1}(Y_i - X_i \beta)$
 
 We can maximize \Beta in this expression (which is the same as minimizing the entire expression since the $\beta$s are negative) with what is known as the Generalized Least Squares estimator of $\beta$:
 
@@ -106,7 +109,7 @@ We won't delve too deep into the math, but the general idea is that when we perf
 
 For our fixed parameters, we use the term "estimate". But $b_i$ is technically a random variable, so we're going to "predict" its value rather than estimate it. Predicting a random variable is essentially pedicting it's conditional mean, so we can get a good prediction of $b_i$ using:
 
-$E(b_i|Y_i) = GZ'\Sigma_{i}^{-1}(Y_i-Xi\hat{\beta})$, where $\Sigma_{i} = Cov(Y_i) = Z_IGZ_i' + R_i$
+$E(b_i|Y_i) = GZ'\Sigma_{i}^{-1}(Y_i-Xi\hat{\beta})$, where $\Sigma_{i} = Cov(Y_i) = Z_iGZ_i' + R_i$
 
 If we use our REML estimate for the covaraince parameter, we call this the predictor the "empirical BLUP"
 
