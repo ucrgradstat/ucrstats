@@ -85,7 +85,15 @@ $\epsilon_{ij}$ - is a vector of errors
 
 ### Estimating using Maximum Likelihood
 
+Maximum Likelihood is technique to estimate parameters by using the fixed data points and finding a value for the estimate that has the highest chance of being observed. This is done by maximizing what is known as the "likelihood function."
+
+$\sum_{i=1}(y_i - X_i \beta)'\Sigma_i^{-1}(y_i - X_i \beta)$
+
+We can maximize \Beta in this expression (which is the same as minimizing the entire expression since the $\beta$s are negative) with what is known as the Generalized Least Squares estimator of $\beta$:
+
 $\hat{\beta} = \{ \sum_{i=1} (X_i'\Sigma_{i}^{-1}X_i) \}^{-1} \sum_{i=1} (X_i'\Sigma_{i}^{-1}y_i)$
+
+In order to solve this, we'd either have to know $\Sigma_i$ or have an estimate of it. So let's see how we can approach that.
 
 ### Restricted Maximum Likelihood Function
 
