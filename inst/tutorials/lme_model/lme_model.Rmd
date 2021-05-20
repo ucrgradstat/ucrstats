@@ -51,7 +51,7 @@ What are some of the different ways we could interpret this data?
 
 ![If we look within each person, the points seem to have a positive trend.](images/ex1.PNG)
 
-![If we look between each person, the trend seems to be negative](images/ex2.PNG)
+![If we look between each person, the trend seems to be negative](images/ex2.png)
 
 If we fit a line to this data using normal methods, we'd lose this aspect of the data and would likely get a poor fit. The power of LMEs is that they act as a middleground between the two plots above and can offer insight into both trends.
 

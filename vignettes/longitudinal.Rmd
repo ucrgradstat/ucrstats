@@ -17,3 +17,11 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(ucrstats)
 ```
+
+
+## Linear Mixed-Effects Model
+
+```{r, eval=FALSE}
+access_tutorial("lme_model")
+```
+

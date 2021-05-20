@@ -136,7 +136,7 @@ $(document).ready(function () {
 <p class="caption">If we look within each person, the points seem to have a positive trend.</p>
 </div>
 <div class="figure">
-<img src="images/ex2.PNG" alt="" />
+<img src="images/ex2.png" alt="" />
 <p class="caption">If we look between each person, the trend seems to be negative</p>
 </div>
 <p>If we fit a line to this data using normal methods, we’d lose this aspect of the data and would likely get a poor fit. The power of LMEs is that they act as a middleground between the two plots above and can offer insight into both trends.</p>
@@ -161,7 +161,11 @@ $(document).ready(function () {
 <h2>Estimating Parameters</h2>
 <div id="section-estimating-using-maximum-likelihood" class="section level3">
 <h3>Estimating using Maximum Likelihood</h3>
+<p>Maximum Likelihood is technique to estimate parameters by using the fixed data points and finding a value for the estimate that has the highest chance of being observed. This is done by maximizing what is known as the “likelihood function.”</p>
+<p><span class="math inline">\(\sum_{i=1}(y_i - X_i \beta)&#39;\Sigma_i^{-1}(y_i - X_i \beta)\)</span></p>
+<p>We can maximize in this expression (which is the same as minimizing the entire expression since the <span class="math inline">\(\beta\)</span>s are negative) with what is known as the Generalized Least Squares estimator of <span class="math inline">\(\beta\)</span>:</p>
 <p><span class="math inline">\(\hat{\beta} = \{ \sum_{i=1} (X_i&#39;\Sigma_{i}^{-1}X_i) \}^{-1} \sum_{i=1} (X_i&#39;\Sigma_{i}^{-1}y_i)\)</span></p>
+<p>In order to solve this, we’d either have to know <span class="math inline">\(\Sigma_i\)</span> or have an estimate of it. So let’s see how we can approach that.</p>
 </div>
 <div id="section-restricted-maximum-likelihood-function" class="section level3">
 <h3>Restricted Maximum Likelihood Function</h3>
@@ -231,7 +235,6 @@ summary(my_model)</code></pre>
 
 <script type="application/shiny-prerendered" data-context="server-start">
 knitr::opts_chunk$set(echo = FALSE)
-
 library(learnr)
 library(ucrstats) # When working on the tutorial, use your code below and comment this entire line.
 
