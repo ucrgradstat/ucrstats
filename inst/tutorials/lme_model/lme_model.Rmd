@@ -89,13 +89,17 @@ $\hat{\beta} = \{ \sum_{i=1} (X_i'\Sigma_{i}^{-1}X_i) \}^{-1} \sum_{i=1} (X_i'\S
 
 ### Restricted Maximum Likelihood Function
 
+There is a slight problem when estimating our covariance term $\Sigma_i$ using the Maximum Likelhihod method: the result will be biased, especially in small samples. To remedy this, we're going to use what is called the Restricted Maximum Likelihood Estimate of $\Sigma_i$. This is obtained by maximizing the following modified log-likelihood function:
+
 $-\frac{1}{2}\log(\Sigma_{i}) -\frac{1}{2}\sum_{i=1} (y_i - X_i\hat{\beta})' \Sigma_{i}^{-1} (y_i - X_i\hat{\beta}) -\frac{1}{2}\log(\sum_{i=1} X_i'\Sigma_{i}^{-1}X_i)$
+
+We won't delve too deep into the math, but the general idea is that when we perform a REML estimate of $\Sigma_i$, we remove all of the $\beta$ terms so that we have a function with only one variable to maximize. Once we have our REML estimate $\hat\Sigma_i$, we can then go back and solve for $\beta$ using our normal; generalized least squares estimate.
 
 ### Best Linear Unbiased Estimator (BLUP)
 
-For our fixed parameters, we use the term estimate. But $b_i$ is technically a random variable, so we're going to "predict" its value rather than estimate it. Predicting a random variable is essentially pedicting it's conditional mean, so we can get a good prediction of $b_i$ using:
+For our fixed parameters, we use the term "estimate". But $b_i$ is technically a random variable, so we're going to "predict" its value rather than estimate it. Predicting a random variable is essentially pedicting it's conditional mean, so we can get a good prediction of $b_i$ using:
 
-$E(b_i|Y) = GZ'\Sigma_{i}^{-1}(Y_i-Xi\hat{\beta})$, where $\Sigma_{i} = Cov(Y_i) = Z_IGZ_i' + R_i$
+$E(b_i|Y_i) = GZ'\Sigma_{i}^{-1}(Y_i-Xi\hat{\beta})$, where $\Sigma_{i} = Cov(Y_i) = Z_IGZ_i' + R_i$
 
 If we use our REML estimate for the covaraince parameter, we call this the predictor the "empirical BLUP"
 
