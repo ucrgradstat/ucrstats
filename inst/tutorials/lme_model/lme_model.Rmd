@@ -42,40 +42,54 @@ But when you create this model, there's a very important assumption you're makin
 
 Sometimes it's safe to assume independence. In those cases, you're good to go. But what if it's not? 
 
-Consider a longitudinal study where we are following children with some sort of rare disease as they grow older. In this scenario, each child will contribute multiple data points as time passes (we'll call these **replications**). Replications coming from the same person will likely be correlated, so it's no longer safe to assume independence meaning that our linear models is longer be appropriate to use. This is where *Linear Mixed Effect Models* (or *LME*) come to the rescue.
+Consider a longitudinal study where we are following children with some sort of rare disease as they grow older. In this scenario, each child will contribute multiple data points as time passes (we'll call these **replications**). Since replications are coming from the same person, they will likely be correlated. It's no longer safe to assume independence, meaning that our linear model is longer be appropriate to use. This is where *Linear Mixed Effect Models* (or *LME*) come to the rescue.
 
-![Figure 1: A simple scatter plot. Notice how the data looks grouped](images/ex.PNG)
+Let's illustrate another point. Suppose we have data from 3 individuals that look like this
 
-![Figure 2: If we attach a adjust a line to each person, we get a better idea of what trends exist](images/ex1.PNG)
+![](images/ex.PNG)
+
+What are some of the different ways we could interpret this data?
+
+![If we look within each person, the points seem to have a positive trend.](images/ex1.PNG)
+
+![If we look between each person, the trend seems to be negative](images/ex2.PNG)
+
+If we fit a line to this data using normal methods, we'd lose this aspect of the data and would likely get a poor fit. The power of LMEs is that they act as a middleground between the two plots above and can offer insight into both trends.
 
 ## The Model
 
-Our model can be expressed as $Y_{i} = X_{i}'\beta + Z_{i}b_i + \epsilon_{ij}$ where
+LMEs utilize **fixed** and **random** effects.
+
++ **Fixed Effects** - A parameter that does not differ from person to person (can be thought of as an independent variable).
+
++ **Random Effects** - A parameter that does vary from person to person. These are treated as random variables, and are assumed to follow some sort of distribution (i.e. the Normal Distribution)
+
+With that in mind, our model can be expressed as $Y_{i} = X_{i}'\beta + Z_{i}b_i + \epsilon_{ij}$ where
 
 $Y_{ij}$ is the response
 
 $X_{i}$ is the design matrix of fixed effect covariates
 
-$Z_{i}$ is the design matrix of random effects covariates, usually a subset of $X_i$
-
 $\beta$ is a vector of the fixed-effects regression coefficients
 
-$b_i$ is vector of the random-effects regression coefficients
+$Z_{i}$ is the design matrix of random effects covariates, usually a subset of $X_i$
 
-$\epsilon_{ij}$ - a vector of errors
+$b_i$ is vector of the random-effects regression coefficients. It is treated as a random variable.
 
-LMEs utilize **fixed** and **random** effects.
+$\epsilon_{ij}$ - is a vector of errors
 
-**Fixed Effects** - A parameter that does not differ from person to person (can be thought of as an independent variable).
 
-**Random Effects** - A parameter that does vary from person to person. These are treated as random variables, and are assumed to follow some sort of distribution (i.e. the Normal Distribution)
 
 
 ## Estimating Parameters
 
-```{r}
+### Estimating using Maximum Likelihood
 
-```
+$\hat{\beta} = \{ \sum_{i=1} (X_i'\Sigma_{i}^{-1}X_i) \}^{-1} \sum_{i=1} (X_i'\Sigma_{i}^{-1}y_i)$
+
+### Restricted Maximum Likelihood Function
+
+$-\frac{1}{2}\log(\Sigma_{i}) -\frac{1}{2}\sum_{i=1} (y_i - X_i\hat{\beta})' \Sigma_{i}^{-1} (y_i - X_i\hat{\beta}) -\frac{1}{2}\log(\sum_{i=1} X_i'\Sigma_{i}^{-1}X_i)$
 
 
 ## Fitting the Model Using R
@@ -100,6 +114,10 @@ summary(intercept_model)
 
 This model has two terms: a fixed effect intercept and a random effects intercept.
 
+The fixed part of the formula is the `1`. This tells the function to create an intercept. The random effects part of the formula is `(1 | id)`. This creates a random intercept term based on each subject in the data. You can see the idea demonstrated with this plot.
+
+![](images/ex3.PNG)
+
 ### Adding Fixed and Random Effects
 
 Now lets build on this model and add some variables from our data. Suppose we want to X1 to our model as a fixed effect. See if you can fill in the following code to build that model.
@@ -117,7 +135,7 @@ my_model <- lme4::lmer(data = lme_one, formula = Y ~ X1 + (1 | id))
 summary(my_model)
 ```
 
-Let's keep building on this model. Now suppose that you want to add the time as a coefficent (the `time_id` column). It makes sense to think that observations within a subject at one time point is likely to be correlated with another time point for that same subject. So let's make time a randome effect. 
+Let's keep building on this model. Now suppose that you want to add the time as a coefficent (the `time_id` column). It makes sense to think that observations within a subject at one time point is likely to be correlated with another time point for that same subject. So let's make time a random effect. 
 
 ```{r randomeMLE, exercise = TRUE}
 my_model <- lme4::lmer(data = lme_one, formula = Y ~ 1 + (1 | id) )
@@ -129,7 +147,16 @@ my_model <- lme4::lmer(data = lme_one, formula = Y ~ X1 + time_id + (1 + time_id
 summary(my_model)
 ```
 
+Once complete, the model will now have a slope term for the time.
 
+One important thing to note when adding random effects is that we usually need to add a fixed effect term for that variable as well. Recall that $Z_i$ is typically a subset of $X_i$.
+
+Try making you're on models using the other variables in the dataset.
+
+```{r tryit, exercise = TRUE}
+my_model <- lme4::lmer(data = lme_one) # Insert some variables into the formula
+#summary(my_model)
+```
 
 
 
