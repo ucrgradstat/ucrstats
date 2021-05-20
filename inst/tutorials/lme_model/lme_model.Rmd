@@ -91,6 +91,16 @@ $\hat{\beta} = \{ \sum_{i=1} (X_i'\Sigma_{i}^{-1}X_i) \}^{-1} \sum_{i=1} (X_i'\S
 
 $-\frac{1}{2}\log(\Sigma_{i}) -\frac{1}{2}\sum_{i=1} (y_i - X_i\hat{\beta})' \Sigma_{i}^{-1} (y_i - X_i\hat{\beta}) -\frac{1}{2}\log(\sum_{i=1} X_i'\Sigma_{i}^{-1}X_i)$
 
+### Best Linear Unbiased Estimator (BLUP)
+
+For our fixed parameters, we use the term estimate. But $b_i$ is technically a random variable, so we're going to "predict" its value rather than estimate it. Predicting a random variable is essentially pedicting it's conditional mean, so we can get a good prediction of $b_i$ using:
+
+$E(b_i|Y) = GZ'\Sigma_{i}^{-1}(Y_i-Xi\hat{\beta})$, where $\Sigma_{i} = Cov(Y_i) = Z_IGZ_i' + R_i$
+
+If we use our REML estimate for the covaraince parameter, we call this the predictor the "empirical BLUP"
+
+$\hat{b_i} =  \hat{G}Z'\hat\Sigma_{i}^{-1}(Y_i-Xi\hat{\beta})$
+
 
 ## Fitting the Model Using R
 

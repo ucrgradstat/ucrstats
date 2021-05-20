@@ -167,6 +167,13 @@ $(document).ready(function () {
 <h3>Restricted Maximum Likelihood Function</h3>
 <p><span class="math inline">\(-\frac{1}{2}\log(\Sigma_{i}) -\frac{1}{2}\sum_{i=1} (y_i - X_i\hat{\beta})&#39; \Sigma_{i}^{-1} (y_i - X_i\hat{\beta}) -\frac{1}{2}\log(\sum_{i=1} X_i&#39;\Sigma_{i}^{-1}X_i)\)</span></p>
 </div>
+<div id="section-best-linear-unbiased-estimator-blup" class="section level3">
+<h3>Best Linear Unbiased Estimator (BLUP)</h3>
+<p>For our fixed parameters, we use the term estimate. But <span class="math inline">\(b_i\)</span> is technically a random variable, so we’re going to “predict” its value rather than estimate it. Predicting a random variable is essentially pedicting it’s conditional mean, so we can get a good prediction of <span class="math inline">\(b_i\)</span> using:</p>
+<p><span class="math inline">\(E(b_i|Y) = GZ&#39;\Sigma_{i}^{-1}(Y_i-Xi\hat{\beta})\)</span>, where <span class="math inline">\(\Sigma_{i} = Cov(Y_i) = Z_IGZ_i&#39; + R_i\)</span></p>
+<p>If we use our REML estimate for the covaraince parameter, we call this the predictor the “empirical BLUP”</p>
+<p><span class="math inline">\(\hat{b_i} = \hat{G}Z&#39;\hat\Sigma_{i}^{-1}(Y_i-Xi\hat{\beta})\)</span></p>
+</div>
 </div>
 <div id="section-fitting-the-model-using-r" class="section level2">
 <h2>Fitting the Model Using R</h2>
