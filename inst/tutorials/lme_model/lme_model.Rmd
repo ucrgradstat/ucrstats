@@ -49,9 +49,9 @@ Let's illustrate another point. Suppose we have data from 3 individuals that loo
 
 What are some of the different ways we could interpret this data?
 
-![If we look within each person, the points seem to have a positive trend.](images/ex1.png)
+![*If we look within each person, the points seem to have a positive trend.*](images/ex1.png)
 
-![If we look between each person, the trend seems to be negative](images/ex2.png)
+![*If we look between each person, the trend seems to be negative*](images/ex2.png)
 
 If we fit a line to this data using normal methods, we'd lose this aspect of the data and would likely get a poor fit. The power of LMEs is that they act as a middleground between the two plots above and can offer insight into both trends.
 
@@ -65,7 +65,7 @@ LMEs utilize **fixed** and **random** effects.
 
 With that in mind, our model for an ith individual can be expressed as $Y_{i} = X_{i}'\beta + Z_{i}b_i + \epsilon_{ij}$ where
 
-$Y_{i}$ is the response vector 
+$Y_{i}$ is a vector of responses
 
 $X_{i}$ is the design matrix of fixed effect covariates
 
@@ -79,9 +79,21 @@ $\epsilon_{i}$ - is a vector of errors
 
 ### The Covariance Matrix
 
-"Light Intro"
+When working with multiple continuos variables, we can represent the variation with a square n x n matrix (where n is the number of explanatory variables). Each element in the matrix represents a covariance pair. The diagonal contains the variances of each variable (recall that $Covar(X,X) =Var(X)$). 
 
-Separation between random covar and error covar
+We will denote the covariance matrix as $\Sigma_i$.
+
+
+![*A 3x3 Covariance Matrix.*](images/covar.png)
+
+
+When using LMEs, our covariance can be broken down into two parts: The random covariance and the error covariance.
+
+$Cov(Y_i) = Z_iGZ_i' + R_i \sigma^2I_n$
+
++ $G$ is the Variance-Covariance matrix of the random effects (between subject source of variation)
+
++ $R_i = \sigma^2I_n$ is the error/residual Variance-Covariance matrix (within subject source of variation). $I$ is the identity matrix and and $\sigma^2$ is the residual error that comes from $\epsilon_i$.
 
 ## Estimating Parameters
 

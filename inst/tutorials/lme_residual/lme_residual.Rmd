@@ -80,7 +80,7 @@ summary(lme_fit)
 
 First we need to get the value of $\Sigma_i$
 
-We can approximate it with $\hat{ \Sigma_i}   = Z_iGZ_i' + \sigma^2I_{n_i}$
+We can approximate it with $\hat{ \Sigma_i} = Z_iGZ_i' + \sigma^2I_{n_i}$
 
 ```{r covar, exercise=TRUE}
 # get the covariance matrix for random effects component (G)
@@ -93,12 +93,12 @@ Zt <- lme4::getME(lme_fit, "Zt")
 err_var <- sigma(lme_fit)^2
 
 # Compute the covariance matrix
-var_b <-  t(Zt) %*% random_covar %*%  Zt
+var_b <-  err_var * t(Zt) %*% random_covar %*%  Zt
 
 # get the covariance of the error term
 sI <- err_var * Diagonal(nrow( lme4::getData(lme_fit)  ))
     
-# We can now compute the Variance of the entiure Y term
+# We can now compute the Variance of the entire Y term
 var_y <- var_b +sI
 ```
 
