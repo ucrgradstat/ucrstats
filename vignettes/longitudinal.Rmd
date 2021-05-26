@@ -19,9 +19,12 @@ library(ucrstats)
 ```
 
 
-## Linear Mixed-Effects Model
+## Linear Mixed-Effects Models
+
+The tutorial for Linear Mixed Effect models can be accessed with the following code. 
 
 ```{r, eval=FALSE}
 access_tutorial("lme_model")
 ```
 
+The tutorial provides a brief introduction to the Theory of LME models and how to create those models in R using the `lme4` package.
