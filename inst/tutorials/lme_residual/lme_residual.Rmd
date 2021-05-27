@@ -115,7 +115,7 @@ We can approximate it with $\hat{ \Sigma_i} = Z_iGZ_i' + \sigma^2I_{n_i}$
 ```{r covar, exercise=TRUE}
 # get the covariance matrix for random effects component (G)
 random_covar <- crossprod(as.matrix(lme4::getME(lme_fit, "Lambdat")))
-random_covar
+#random_covar
 # get the design matrix Z
 Zt <- lme4::getME(lme_fit, "Zt")
 
@@ -155,10 +155,13 @@ t_fit <- L_inv %*% fitted_vals
 
 ## Plotting the Residuals
 
-```{r plot, exercise=TRUE}
-t_resid # Transformed residuals
-t_fit # transformed fitted values
+By using the code from the previous section, we can now perform some residual diagnostics.  The variable `t_resid` contains the transformed residuals, and `t_fit` contains the transformed fitted values. Go ahead and plot a QQ-plot for the tranformed residuals and a transformed fitted vs residuals plot. Observe the resulting plot and answer:
 
++ Is the data approximately normal?
+
++ Does the transformed fitted vs residual plot suggest Constant Variance? Or do you notice any patterns?
+
+```{r plot, exercise=TRUE}
 # Plot the fitted vs residual values
 plot() 
 

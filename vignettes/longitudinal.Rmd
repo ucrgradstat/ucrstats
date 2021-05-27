@@ -14,17 +14,44 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Longitudinal Analysis Tutorials 
+
 ```{r setup}
 library(ucrstats)
 ```
 
 
-## Linear Mixed-Effects Models
+## Accessing tutorials 
 
-The tutorial for Linear Mixed Effect models can be accessed with the following code. 
+Tutorials can be accessed by place the tutorial name or "id" into the `access_tutorial` function. The different tutorials are listed below, with the names/ids shown in parentheses. 
 
 ```{r, eval=FALSE}
+# This code would be used to access the tutorial on Linear Mixed Effects Models
 access_tutorial("lme_model")
 ```
 
-The tutorial provides a brief introduction to the Theory of LME models and how to create those models in R using the `lme4` package.
+
+## Available Tutorials 
+
+*The following are tutorials on methods that may be useful when working with longitudinal data.*
+
+### Wide to Long Data (wide_to_long)
+
+Data can be represented in a few different ways. When dealing with longitudinal data, it is not uncommon to find or be given data in the "wide." format. This format has one row per subject, and all their categories grouped into columns. Although intuitive to humans, many R functions tend to prefer the "long" format, where each unit a subject contributes is given its own row. 
+
+This tutorial will explain how you can transitrion between these two formats using both the `tidyr` package as well as base R.
+
+### Linear Mixed Effect Models (lme_model)
+
+Longitudinal studies present a unique challenge as data points can be correlated with each other (each subject will give multiple responses). Common statistical techniques, such as linear regression, will not work as they assume the data points are independent. Linear Mixed Effect Models provide a great alternative as they are able to account for this correlation problem through the use of fixed and random effects. 
+
+The tutorial provides a brief introduction to the Theory of LME models and how to create those models in R using the `lme4` package. A solid understanding of Linear Regression is recommended.
+
+### Residual Analysis on Linear Mixed Effect Models (lme_residual)
+
+Once an LME model has been fit, we need to analyze the residuals to see if our model is actually a good fit. This tutorial will continue the discussion on Linear Mixed Effects and detail how we can compute, transform, and analyze the residual values. Completing the tutorial on Linear Mixed Effect Models is highly recommended.
+
+This tutorial provides the theory and process of transforming the residuals in an LME model.
+
+
+
