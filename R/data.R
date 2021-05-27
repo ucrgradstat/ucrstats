@@ -39,7 +39,7 @@
 #' A simulated data set used to demonstrate how to fit a linear mixed-effects model with lme4. There are 500 participants. Each participants has up to 25 repeated measurements recorded.
 #'
 #'
-#' @format A data frame with 6720 rows and 7 variables:
+#' @format A data frame with 3396 rows and 7 variables:
 #' \describe{
 #'   \item{id}{An ID variable grouping the repeated measurements}
 #'   \item{time_id}{time point values}
@@ -57,7 +57,7 @@
 #' A simulated data set used to demonstrate how to fit a linear mixed-effects model with lme4. There are 1000 participants. Each participants has up to 25 repeated measurements recorded.
 #'
 #'
-#' @format A data frame with 13184 rows and 8 variables:
+#' @format A data frame with 3447 rows and 8 variables:
 #' \describe{
 #'   \item{id}{An ID variable grouping the repeated measurements}
 #'   \item{time_id}{time point values}
@@ -75,7 +75,7 @@
 #' A simulated data set used to demonstrate how to fit a linear mixed-effects model with lme4. There are 1000 participants. Each participants has up to 25 repeated measurements recorded.
 #'
 #'
-#' @format A data frame with 13643 rows and 8 variables:
+#' @format A data frame with 3347 rows and 8 variables:
 #' \describe{
 #'   \item{id}{An ID variable grouping the repeated measurements}
 #'   \item{time_id}{time point values}

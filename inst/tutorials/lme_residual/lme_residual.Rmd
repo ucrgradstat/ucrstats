@@ -9,6 +9,7 @@ runtime: shiny_prerendered
 library(learnr)
 knitr::opts_chunk$set(echo = FALSE)
 library(ucrstats) # When working on the tutorial, use your code below and comment this entire line.
+library(lme4)
 
 # # For deployment purposes, have the package load the data instead. 
 # 
@@ -19,13 +20,42 @@ library(ucrstats) # When working on the tutorial, use your code below and commen
 # # # Load in the data 
 # load( paste0(root_dir, "/data/lme_two.RData") )
 lme_two$id <- as.factor(lme_two$id)
-
-
-```
-
-
-```{r}
 lme_fit <- lme4::lmer(data = lme_two, formula = Y ~ X1 + time_id + (1 + time_id | id)  )
+
+# get the covariance matrix for random effects component (G)
+random_covar <- crossprod(as.matrix(lme4::getME(lme_fit, "Lambdat")))
+random_covar
+# get the design matrix Z
+Zt <- lme4::getME(lme_fit, "Zt")
+
+# get the variance of the error term
+err_var <- sigma(lme_fit)^2
+
+# Compute the covariance matrix
+var_b <-  err_var * t(Zt) %*% random_covar %*%  Zt
+
+# get the covariance of the error term
+sI <- err_var * diag(nrow( lme4::getData(lme_fit)  ))
+    
+# We can now compute the Variance of the entire Y term
+var_y <- var_b +sI
+
+# Transform the fitted and residual values
+
+# Use Cholesky Decomposition on the variance of Y
+var_y_decmp <- chol(var_y)
+    
+# Get the residuals from the fit
+resids <- residuals(lme_fit)
+    
+# get the fitted values
+fitted_vals <- fitted(lme_fit)
+    
+# Transform those values by applying the inverse of L
+L_inv <- solve(var_y_decmp)
+t_resid <- L_inv %*% resids
+t_fit <- L_inv %*% fitted_vals     
+
 ```
 
 
@@ -84,7 +114,7 @@ We can approximate it with $\hat{ \Sigma_i} = Z_iGZ_i' + \sigma^2I_{n_i}$
 
 ```{r covar, exercise=TRUE}
 # get the covariance matrix for random effects component (G)
-random_covar <- crossprod( as.matrix (lme4::getME(lme_fit, "Lambdat") ))
+random_covar <- crossprod(as.matrix(lme4::getME(lme_fit, "Lambdat")))
 random_covar
 # get the design matrix Z
 Zt <- lme4::getME(lme_fit, "Zt")
@@ -96,7 +126,7 @@ err_var <- sigma(lme_fit)^2
 var_b <-  err_var * t(Zt) %*% random_covar %*%  Zt
 
 # get the covariance of the error term
-sI <- err_var * Diagonal(nrow( lme4::getData(lme_fit)  ))
+sI <- err_var * diag(nrow( lme4::getData(lme_fit)  ))
     
 # We can now compute the Variance of the entire Y term
 var_y <- var_b +sI

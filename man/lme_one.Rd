@@ -5,7 +5,7 @@
 \alias{lme_one}
 \title{A simulated data set used to demonstrate how to fit a linear mixed-effects model with lme4. There are 500 participants. Each participants has up to 25 repeated measurements recorded.}
 \format{
-A data frame with 6720 rows and 7 variables:
+A data frame with 3396 rows and 7 variables:
 \describe{
 \item{id}{An ID variable grouping the repeated measurements}
 \item{time_id}{time point values}

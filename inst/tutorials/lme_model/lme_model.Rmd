@@ -45,11 +45,11 @@ Consider a longitudinal study where we are following children with some sort of 
 
 Let's illustrate another point. Suppose we have data from 3 individuals that look like this
 
-![](images/ex.png)
+![](images/ex.PNG)
 
 What are some of the different ways we could interpret this data?
 
-![*If we look within each person, the points seem to have a positive trend.*](images/ex1.png)
+![*If we look within each person, the points seem to have a positive trend.*](images/ex1.PNG)
 
 ![*If we look between each person, the trend seems to be negative*](images/ex2.png)
 
@@ -79,9 +79,9 @@ $\epsilon_{i}$ - is a vector of errors
 
 ### The Covariance Matrix
 
-When working with multiple continuos variables, we can represent the variation with a square n x n matrix (where n is the number of explanatory variables). Each element in the matrix represents a covariance pair. The diagonal contains the variances of each variable (recall that $Covar(X,X) =Var(X)$). 
+When working with multiple continuos variables, we can represent the variation with a square n x n matrix (where n is the number of random variables). Each element in the matrix represents a covariance pair. The diagonal contains the variances of each variable (recall that $Covar(X,X) =Var(X)$). 
 
-We will denote the covariance matrix as $\Sigma_i$.
+We will denote the covariance matrix as $\Sigma$.
 
 
 ![*A 3x3 Covariance Matrix.*](images/covar.png)
@@ -89,7 +89,7 @@ We will denote the covariance matrix as $\Sigma_i$.
 
 When using LMEs, our covariance can be broken down into two parts: The random covariance and the error covariance.
 
-$Cov(Y_i) = Z_iGZ_i' + R_i \sigma^2I_n$
+$\Sigma_i = Cov(Y_i) = Z_iGZ_i' + R_i \sigma^2I_n$
 
 + $G$ is the Variance-Covariance matrix of the random effects (between subject source of variation)
 
