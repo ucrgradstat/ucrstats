@@ -33,7 +33,7 @@ An example is shown below
 
 ```{r, eval=FALSE}
 # This code would be used to access the tutorial on Linear Mixed Effects Models
-access_tutorial("lme_model")
+ucrstats::access_tutorial("lme_model")
 ```
 
 ### Longitudinal Data
