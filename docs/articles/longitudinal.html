@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ucrstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.9</span>
       </span>
     </div>
 
@@ -82,13 +82,42 @@
 
     
     
+<div id="longitudinal-analysis-tutorials" class="section level1">
+<h1 class="hasAnchor">
+<a href="#longitudinal-analysis-tutorials" class="anchor"></a>Longitudinal Analysis Tutorials</h1>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ucrstats</span><span class="op">)</span></code></pre></div>
-<div id="linear-mixed-effects-model" class="section level2">
+<div id="accessing-tutorials" class="section level2">
 <h2 class="hasAnchor">
-<a href="#linear-mixed-effects-model" class="anchor"></a>Linear Mixed-Effects Model</h2>
+<a href="#accessing-tutorials" class="anchor"></a>Accessing tutorials</h2>
+<p>Tutorials can be accessed by place the tutorial name or “id” into the <code>access_tutorial</code> function. The different tutorials are listed below, with the names/ids shown in parentheses.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/access_tutorial.html">access_tutorial</a></span><span class="op">(</span><span class="st">"lme_model"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># This code would be used to access the tutorial on Linear Mixed Effects Models</span>
+<span class="fu"><a href="../reference/access_tutorial.html">access_tutorial</a></span><span class="op">(</span><span class="st">"lme_model"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="available-tutorials" class="section level2">
+<h2 class="hasAnchor">
+<a href="#available-tutorials" class="anchor"></a>Available Tutorials</h2>
+<p><em>The following are tutorials on methods that may be useful when working with longitudinal data.</em></p>
+<div id="wide-to-long-data-wide_to_long" class="section level3">
+<h3 class="hasAnchor">
+<a href="#wide-to-long-data-wide_to_long" class="anchor"></a>Wide to Long Data (wide_to_long)</h3>
+<p>Data can be represented in a few different ways. When dealing with longitudinal data, it is not uncommon to find or be given data in the “wide.” format. This format has one row per subject, and all their categories grouped into columns. Although intuitive to humans, many R functions tend to prefer the “long” format, where each unit a subject contributes is given its own row.</p>
+<p>This tutorial will explain how you can transition between these two formats using both the <code>tidyr</code> package as well as base R.</p>
+</div>
+<div id="linear-mixed-effect-models-lme_model" class="section level3">
+<h3 class="hasAnchor">
+<a href="#linear-mixed-effect-models-lme_model" class="anchor"></a>Linear Mixed Effect Models (lme_model)</h3>
+<p>Longitudinal studies present a unique challenge as data points can be correlated with each other (each subject will give multiple responses). Common statistical techniques, such as linear regression, will not work as they assume the data points are independent. Linear Mixed Effect Models provide a great alternative as they are able to account for this correlation problem through the use of fixed and random effects.</p>
+<p>The tutorial provides a brief introduction to the Theory of LME models and how to create those models in R using the <code>lme4</code> package. A solid understanding of Linear Regression is recommended.</p>
+</div>
+<div id="residual-analysis-on-linear-mixed-effect-models-lme_residual" class="section level3">
+<h3 class="hasAnchor">
+<a href="#residual-analysis-on-linear-mixed-effect-models-lme_residual" class="anchor"></a>Residual Analysis on Linear Mixed Effect Models (lme_residual)</h3>
+<p>Once an LME model has been fit, we need to analyze the residuals to see if our model is actually a good fit. This tutorial will continue the discussion on Linear Mixed Effects and detail how we can compute, transform, and analyze the residual values. Completing the tutorial on Linear Mixed Effect Models is highly recommended.</p>
+<p>This tutorial provides the theory and process of transforming the residuals in an LME model.</p>
+</div>
+</div>
 </div>
   </div>
 

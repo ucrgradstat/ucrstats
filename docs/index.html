@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ucrstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.9</span>
       </span>
     </div>
 
@@ -77,7 +77,52 @@
 <div id="ucrstats" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#ucrstats" class="anchor"></a>ucrstats</h1></div>
-<p>An R Package containing materials to support students at UCR.</p>
+<div id="about" class="section level2">
+<h2 class="hasAnchor">
+<a href="#about" class="anchor"></a>About</h2>
+<p>This is an open source R Package containing materials to support students at UCR. It contains tutorials on various subjects that may or may not be covered by the curriculum. These tutorials are made using learnr. Everyone is welcome to contribute tutorials or access these tutorials.</p>
+</div>
+<div id="how-to-install" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-to-install" class="anchor"></a>How to install</h2>
+<p>To install the package, use the following code:</p>
+<pre><code><a href="https://devtools.r-lib.org//reference/remote-reexports.html">#install.packages("devtools")
+#Install R Package
+devtools::install_github("ucrgradstat/ucrstats")
+</a></code></pre>
+<p>Make sure to install the devtools package first.</p>
+<div id="a-note-for-windows-users" class="section level4">
+<h4 class="hasAnchor">
+<a href="#a-note-for-windows-users" class="anchor"></a>A note for Windows users</h4>
+<p>You will need to install rtools to allow the devtools package to install packages from a remote repository: <a href="https://cran.r-project.org/bin/windows/Rtools/" class="uri">https://cran.r-project.org/bin/windows/Rtools/</a>. Make sure to update R as well.</p>
+</div>
+</div>
+<div id="current-tutorials" class="section level2">
+<h2 class="hasAnchor">
+<a href="#current-tutorials" class="anchor"></a>Current tutorials</h2>
+<p>Tutorials can be accessed by using the <code>access_tutorial</code> function and inserting the tutorial name or “id” as an argument.</p>
+<p>An example is shown below</p>
+<pre><code><a href="reference/access_tutorial.html"># This code would be used to access the tutorial on Linear Mixed Effects Models
+ucrstats::access_tutorial("lme_model")</a></code></pre>
+<div id="longitudinal-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#longitudinal-data" class="anchor"></a>Longitudinal Data</h3>
+<p>These tutorials focus on a few methods commonly used to deal with longitudinal data in R. The tutorials include:</p>
+<ul>
+<li><p>Converting wide data to long (“wide_to_long”)</p></li>
+<li><p>Introduction to Linear Mixed Effects Models in R (“lme_model”)</p></li>
+<li><p>Residual Analysis of Linear Mixed Effect Models (“lme_residual”)</p></li>
+</ul>
+</div>
+</div>
+<div id="contributors" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contributors" class="anchor"></a>Contributors</h2>
+<ul>
+<li><p>Isaac Quintanilla Salinas</p></li>
+<li><p>Christian Dueñas</p></li>
+</ul>
+</div>
 </div>
   </div>
 
