@@ -15,7 +15,7 @@ To install the package, use the following code:
 ```
 #install.packages("devtools")
 #Install R Package
-devtools::install_gitlab("ucgradstat/ucrstats")
+devtools::install_github("ucgradstat/ucrstats")
 
 ```
 Make sure to install the devtools package first.
