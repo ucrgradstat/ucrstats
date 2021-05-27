@@ -39,7 +39,7 @@ access_tutorial("lme_model")
 
 Data can be represented in a few different ways. When dealing with longitudinal data, it is not uncommon to find or be given data in the "wide." format. This format has one row per subject, and all their categories grouped into columns. Although intuitive to humans, many R functions tend to prefer the "long" format, where each unit a subject contributes is given its own row. 
 
-This tutorial will explain how you can transitrion between these two formats using both the `tidyr` package as well as base R.
+This tutorial will explain how you can transition between these two formats using both the `tidyr` package as well as base R.
 
 ### Linear Mixed Effect Models (lme_model)
 

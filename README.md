@@ -31,7 +31,7 @@ Tutorials can be accessed by using the `access_tutorial` function and inserting 
 
 An example is shown below
 
-```{r, eval=FALSE}
+```
 # This code would be used to access the tutorial on Linear Mixed Effects Models
 ucrstats::access_tutorial("lme_model")
 ```

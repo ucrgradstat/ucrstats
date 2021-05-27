@@ -13,7 +13,7 @@ library(ucrstats) # When working on the tutorial, use your code below and commen
 
 # For deployment purposes, have the package load the data instead. 
 
-# # #Load in the psthway to the datasets
+# # #Load in the pathway to the datasets
 # 
 # root_dir <- dirname(dirname(dirname(getwd())))
 # 
@@ -79,7 +79,7 @@ $\epsilon_{i}$ - is a vector of errors
 
 ### The Covariance Matrix
 
-When working with multiple continuos variables, we can represent the variation with a square n x n matrix (where n is the number of random variables). Each element in the matrix represents a covariance pair. The diagonal contains the variances of each variable (recall that $Covar(X,X) =Var(X)$). 
+When working with multiple continuous variables, we can represent the variation with a square n x n matrix (where n is the number of random variables). Each element in the matrix represents a covariance pair. The diagonal contains the variances of each variable (recall that $Covar(X,X) =Var(X)$). 
 
 We will denote the covariance matrix as $\Sigma$.
 
@@ -111,7 +111,7 @@ In order to solve this, we'd either have to know $\Sigma_i$ or have an estimate 
 
 ### Restricted Maximum Likelihood Function
 
-There is a slight problem when estimating our covariance term $\Sigma_i$ using the Maximum Likelhihod method: the result will be biased, especially in small samples. To remedy this, we're going to use what is called the Restricted Maximum Likelihood Estimate of $\Sigma_i$. This is obtained by maximizing the following modified log-likelihood function:
+There is a slight problem when estimating our covariance term $\Sigma_i$ using the Maximum Likelihood method: the result will be biased, especially in small samples. To remedy this, we're going to use what is called the Restricted Maximum Likelihood Estimate of $\Sigma_i$. This is obtained by maximizing the following modified log-likelihood function:
 
 $-\frac{1}{2}\log(\Sigma_{i}) -\frac{1}{2}\sum_{i=1} (y_i - X_i\hat{\beta})' \Sigma_{i}^{-1} (y_i - X_i\hat{\beta}) -\frac{1}{2}\log(\sum_{i=1} X_i'\Sigma_{i}^{-1}X_i)$
 
@@ -119,7 +119,7 @@ We won't delve too deep into the math, but the general idea is that when we perf
 
 ### Best Linear Unbiased Estimator (BLUP)
 
-For our fixed parameters, we use the term "estimate". But $b_i$ is technically a random variable, so we're going to "predict" its value rather than estimate it. Predicting a random variable is essentially pedicting it's conditional mean, so we can get a good prediction of $b_i$ using:
+For our fixed parameters, we use the term "estimate". But $b_i$ is technically a random variable, so we're going to "predict" its value rather than estimate it. Predicting a random variable is essentially predicting it's conditional mean, so we can get a good prediction of $b_i$ using:
 
 $E(b_i|Y_i) = GZ'\Sigma_{i}^{-1}(Y_i-Xi\hat{\beta})$, where $\Sigma_{i} = Cov(Y_i) = Z_iGZ_i' + R_i$
 
@@ -158,7 +158,7 @@ The fixed part of the formula is the `1`. This tells the function to create an i
 
 Now lets build on this model and add some variables from our data. Suppose we want to X1 to our model as a fixed effect. See if you can fill in the following code to build that model.
 
-Hint: Think about how you would add a coefficent to the model using `lm()`
+Hint: Think about how you would add a coefficient to the model using `lm()`
 
 
 ```{r firstLME, exercise = TRUE}
@@ -171,7 +171,7 @@ my_model <- lme4::lmer(data = lme_one, formula = Y ~ X1 + (1 | id))
 summary(my_model)
 ```
 
-Let's keep building on this model. Now suppose that you want to add the time as a coefficent (the `time_id` column). It makes sense to think that observations within a subject at one time point is likely to be correlated with another time point for that same subject. So let's make time a random effect. 
+Let's keep building on this model. Now suppose that you want to add the time as a coefficient (the `time_id` column). It makes sense to think that observations within a subject at one time point is likely to be correlated with another time point for that same subject. So let's make time a random effect. 
 
 ```{r randomeMLE, exercise = TRUE}
 my_model <- lme4::lmer(data = lme_one, formula = Y ~ 1 + (1 | id) )
