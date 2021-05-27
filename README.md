@@ -20,7 +20,7 @@ devtools::install_gitlab("ucgradstat/ucrstats")
 ```
 Make sure to install the devtools package first.
 
-#### Windows
+#### A note for Windows users
 
 You will need to install rtools to allow the devtools package to install packages from a remote repository: https://cran.r-project.org/bin/windows/Rtools/.
 Make sure to update R as well.
