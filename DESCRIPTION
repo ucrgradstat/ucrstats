@@ -1,6 +1,6 @@
 Package: ucrstats
 Title: UCR Statistics 
-Version: 0.0.10
+Version: 0.0.11
 Author: c(
   person("Isaac", "Quintanilla Salinas"),
   person("Christian", "Dueñas")
@@ -17,9 +17,11 @@ Depends:
     R (>= 3.5.0)
 Imports: 
          learnr,
+         tidyr,
+         lme4,
+         tidyverse,
+         rmarkdown,
+         knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Suggests: 
-    rmarkdown,
-    knitr
 VignetteBuilder: knitr
