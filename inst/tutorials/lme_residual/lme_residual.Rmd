@@ -26,7 +26,7 @@ lme_fit <- lme4::lmer(data = lme_two, formula = Y ~ X1 + time_id + (1 + time_id 
 random_covar <- crossprod(as.matrix(lme4::getME(lme_fit, "Lambdat")))
 random_covar
 # get the design matrix Z
-Zt <- lme4::getME(lme_fit, "Zt")
+Zt <- as.matrix(lme4::getME(lme_fit, "Zt"))
 
 # get the variance of the error term
 err_var <- sigma(lme_fit)^2
@@ -117,7 +117,7 @@ We can approximate it with $\hat{ \Sigma_i} = Z_iGZ_i' + \sigma^2I_{n_i}$
 random_covar <- crossprod(as.matrix(lme4::getME(lme_fit, "Lambdat")))
 #random_covar
 # get the design matrix Z
-Zt <- lme4::getME(lme_fit, "Zt")
+Zt <- as.matrix(lme4::getME(lme_fit, "Zt"))
 
 # get the variance of the error term
 err_var <- sigma(lme_fit)^2

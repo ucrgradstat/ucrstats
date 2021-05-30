@@ -64,7 +64,7 @@ LMEs utilize **fixed** and **random** effects.
 
 + **Random Effects** - A parameter that does vary from person to person. These are treated as random variables, and are assumed to follow some sort of distribution (i.e. the Normal Distribution)
 
-With that in mind, our model for an ith individual can be expressed as $Y_{i} = X_{i}'\beta + Z_{i}b_i + \epsilon_{ij}$ where
+With that in mind, our model for an ith individual can be expressed as $Y_{i} = X_{i}'\beta + Z_{i}b_i + \epsilon_{i}$ where
 
 $Y_{i}$ is a vector of responses
 
@@ -106,7 +106,7 @@ $\sum_{i=1}(Y_i - X_i \beta)'\Sigma_i^{-1}(Y_i - X_i \beta)$
 
 We can maximize \Beta in this expression (which is the same as minimizing the entire expression since the $\beta$s are negative) with what is known as the Generalized Least Squares estimator of $\beta$:
 
-$\hat{\beta} = \{ \sum_{i=1} (X_i'\Sigma_{i}^{-1}X_i) \}^{-1} \sum_{i=1} (X_i'\Sigma_{i}^{-1}y_i)$
+$\hat{\beta} = \{ \sum_{i=1} (X_i'\Sigma_{i}^{-1}X_i) \}^{-1} \sum_{i=1} (X_i'\Sigma_{i}^{-1}Y_i)$
 
 In order to solve this, we'd either have to know $\Sigma_i$ or have an estimate of it. So let's see how we can approach that.
 
@@ -114,7 +114,7 @@ In order to solve this, we'd either have to know $\Sigma_i$ or have an estimate 
 
 There is a slight problem when estimating our covariance term $\Sigma_i$ using the Maximum Likelihood method: the result will be biased, especially in small samples. To remedy this, we're going to use what is called the Restricted Maximum Likelihood Estimate of $\Sigma_i$. This is obtained by maximizing the following modified log-likelihood function:
 
-$-\frac{1}{2}\log(\Sigma_{i}) -\frac{1}{2}\sum_{i=1} (y_i - X_i\hat{\beta})' \Sigma_{i}^{-1} (y_i - X_i\hat{\beta}) -\frac{1}{2}\log(\sum_{i=1} X_i'\Sigma_{i}^{-1}X_i)$
+$-\frac{1}{2}\log(\Sigma_{i}) -\frac{1}{2}\sum_{i=1} (Y_i - X_i\hat{\beta})' \Sigma_{i}^{-1} (Y_i - X_i\hat{\beta}) -\frac{1}{2}\log(\sum_{i=1} X_i'\Sigma_{i}^{-1}X_i)$
 
 We won't delve too deep into the math, but the general idea is that when we perform a REML estimate of $\Sigma_i$, we remove all of the $\beta$ terms so that we have a function with only one variable to maximize. Once we have our REML estimate $\hat\Sigma_i$, we can then go back and solve for $\beta$ using our normal; generalized least squares estimate.
 
@@ -188,7 +188,7 @@ Once complete, the model will now have a slope term for the time.
 
 One important thing to note when adding random effects is that we usually need to add a fixed effect term for that variable as well. Recall that $Z_i$ is typically a subset of $X_i$.
 
-Try making you're on models using the other variables in the dataset.
+Try making you\'re on models using the other variables in the dataset.
 
 ```{r tryit, exercise = TRUE}
 my_model <- lme4::lmer(data = lme_one) # Insert some variables into the formula
