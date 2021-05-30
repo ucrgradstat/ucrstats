@@ -34,17 +34,17 @@ library(lme4)
 
 ### Why Linear Mixed Effects
 
-Up to this point, you've likely been using linear models to model your data. Perhaps it looks something like 
+Up to this point, you\'ve likely been using linear models to model your data. Perhaps it looks something like 
 
 $Y = \beta X + \epsilon$
 
-But when you create this model, there's a very important assumption you're making: linear models require that the data be **independent**. 
+But when you create this model, there\'s a very important assumption you\'re making: linear models require that the data be **independent**. 
 
-Sometimes it's safe to assume independence. In those cases, you're good to go. But what if it's not? 
+Sometimes it\'s safe to assume independence. In those cases, you\'re good to go. But what if it\'s not? 
 
-Consider a longitudinal study where we are following children with some sort of rare disease as they grow older. In this scenario, each child will contribute multiple data points as time passes (we'll call these **replications**). Since replications are coming from the same person, they will likely be correlated. It's no longer safe to assume independence, meaning that our linear model is longer be appropriate to use. This is where *Linear Mixed Effect Models* (or *LME*) come to the rescue.
+Consider a longitudinal study where we are following children with some sort of rare disease as they grow older. In this scenario, each child will contribute multiple data points as time passes (we\'ll call these **replications**). Since replications are coming from the same person, they will likely be correlated. It\'s no longer safe to assume independence, meaning that our linear model is longer be appropriate to use. This is where *Linear Mixed Effect Models* (or *LME*) come to the rescue.
 
-Let's illustrate another point. Suppose we have data from 3 individuals that look like this
+Let\'s illustrate another point. Suppose we have data from 3 individuals that look like this
 
 ![](images/ex.PNG)
 
@@ -54,7 +54,7 @@ What are some of the different ways we could interpret this data?
 
 ![*If we look between each person, the trend seems to be negative*](images/ex2.png)
 
-If we fit a line to this data using normal methods, we'd lose this aspect of the data and would likely get a poor fit. The power of LMEs is that they act as a middleground between the two plots above and can offer insight into both trends.
+If we fit a line to this data using normal methods, we\'d lose this aspect of the data and would likely get a poor fit. The power of LMEs is that they act as a middleground between the two plots above and can offer insight into both trends.
 
 ## The Model
 
@@ -100,7 +100,7 @@ $\Sigma_i = Cov(Y_i) = Z_iGZ_i' + R_i \sigma^2I_n$
 
 ### Estimating using Maximum Likelihood
 
-Maximum Likelihood is technique to estimate parameters by using the fixed data points and finding a value for the estimate that has the highest chance of being observed. This is done by maximizing what is known as the "likelihood function."
+Maximum Likelihood is technique to estimate parameters by using the fixed data points and finding a value for the estimate that has the highest chance of being observed. This is done by maximizing what is known as the \"likelihood function.\"
 
 $\sum_{i=1}(Y_i - X_i \beta)'\Sigma_i^{-1}(Y_i - X_i \beta)$
 
@@ -108,23 +108,23 @@ We can maximize \Beta in this expression (which is the same as minimizing the en
 
 $\hat{\beta} = \{ \sum_{i=1} (X_i'\Sigma_{i}^{-1}X_i) \}^{-1} \sum_{i=1} (X_i'\Sigma_{i}^{-1}Y_i)$
 
-In order to solve this, we'd either have to know $\Sigma_i$ or have an estimate of it. So let's see how we can approach that.
+In order to solve this, we\'d either have to know $\Sigma_i$ or have an estimate of it. So let\'s see how we can approach that.
 
 ### Restricted Maximum Likelihood Function
 
-There is a slight problem when estimating our covariance term $\Sigma_i$ using the Maximum Likelihood method: the result will be biased, especially in small samples. To remedy this, we're going to use what is called the Restricted Maximum Likelihood Estimate of $\Sigma_i$. This is obtained by maximizing the following modified log-likelihood function:
+There is a slight problem when estimating our covariance term $\Sigma_i$ using the Maximum Likelihood method: the result will be biased, especially in small samples. To remedy this, we\'re going to use what is called the Restricted Maximum Likelihood Estimate of $\Sigma_i$. This is obtained by maximizing the following modified log-likelihood function:
 
 $-\frac{1}{2}\log(\Sigma_{i}) -\frac{1}{2}\sum_{i=1} (Y_i - X_i\hat{\beta})' \Sigma_{i}^{-1} (Y_i - X_i\hat{\beta}) -\frac{1}{2}\log(\sum_{i=1} X_i'\Sigma_{i}^{-1}X_i)$
 
-We won't delve too deep into the math, but the general idea is that when we perform a REML estimate of $\Sigma_i$, we remove all of the $\beta$ terms so that we have a function with only one variable to maximize. Once we have our REML estimate $\hat\Sigma_i$, we can then go back and solve for $\beta$ using our normal; generalized least squares estimate.
+We won\'t delve too deep into the math, but the general idea is that when we perform a REML estimate of $\Sigma_i$, we remove all of the $\beta$ terms so that we have a function with only one variable to maximize. Once we have our REML estimate $\hat\Sigma_i$, we can then go back and solve for $\beta$ using our normal; generalized least squares estimate.
 
 ### Best Linear Unbiased Estimator (BLUP)
 
-For our fixed parameters, we use the term "estimate". But $b_i$ is technically a random variable, so we're going to "predict" its value rather than estimate it. Predicting a random variable is essentially predicting it's conditional mean, so we can get a good prediction of $b_i$ using:
+For our fixed parameters, we use the term \"estimate\". But $b_i$ is technically a random variable, so we're going to \"predict\" its value rather than estimate it. Predicting a random variable is essentially predicting it\'s conditional mean, so we can get a good prediction of $b_i$ using:
 
 $E(b_i|Y_i) = GZ'\Sigma_{i}^{-1}(Y_i-Xi\hat{\beta})$, where $\Sigma_{i} = Cov(Y_i) = Z_iGZ_i' + R_i$
 
-If we use our REML estimate for the covaraince parameter, we call this the predictor the "empirical BLUP"
+If we use our REML estimate for the covaraince parameter, we call this the predictor the \"empirical BLUP\"
 
 $\hat{b_i} =  \hat{G}Z'\hat\Sigma_{i}^{-1}(Y_i-Xi\hat{\beta})$
 
@@ -140,7 +140,7 @@ Lets take a look at our simulated data which is stored in the dataframe named `l
 lme_one
 ```
 
-We can fit an LME with just an intercept using the `lmer` function from the `lme4` package. Here's a simple intercept model
+We can fit an LME with just an intercept using the `lmer` function from the `lme4` package. Here\'s a simple intercept model
 
 ```{r intercept, exercise = TRUE}
 # Use the lme_one function to create a model
@@ -172,7 +172,7 @@ my_model <- lme4::lmer(data = lme_one, formula = Y ~ X1 + (1 | id))
 summary(my_model)
 ```
 
-Let's keep building on this model. Now suppose that you want to add the time as a coefficient (the `time_id` column). It makes sense to think that observations within a subject at one time point is likely to be correlated with another time point for that same subject. So let's make time a random effect. 
+Let\'s keep building on this model. Now suppose that you want to add the time as a coefficient (the `time_id` column). It makes sense to think that observations within a subject at one time point is likely to be correlated with another time point for that same subject. So let\'s make time a random effect. 
 
 ```{r randomeMLE, exercise = TRUE}
 my_model <- lme4::lmer(data = lme_one, formula = Y ~ 1 + (1 | id) )

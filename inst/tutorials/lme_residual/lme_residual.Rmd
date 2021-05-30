@@ -77,9 +77,9 @@ By the nature of longitudinal studies, the residuals are correlated and do not n
 
 ## Transforming the Residuals
 
-Our aim in transforming the resiudals is to "de-correlate" them that they have zero correlation and constant variance. This will allow us to examine them like a we would a linear model. 
+Our aim in transforming the resiudals is to \"de-correlate\" them that they have zero correlation and constant variance. This will allow us to examine them like a we would a linear model. 
 
-To transform the residuals, we'll use the Cholesky decompostion of $\hat{\Sigma}_i = L_iL_i'$
+To transform the residuals, we\'ll use the Cholesky decompostion of $\hat{\Sigma}_i = L_iL_i'$
 
 ![](images/Cholesky.png)
 

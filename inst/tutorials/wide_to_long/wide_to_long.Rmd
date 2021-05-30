@@ -33,7 +33,7 @@ library(tidyr)
 
 ## Introduction
 
-In this tutorial, we'll be discussing the difference between wide data and long data. We'll also see how we can transition from wide to long using both the `tidyr` package as well as base R.
+In this tutorial, we\'ll be discussing the difference between wide data and long data. We\'ll also see how we can transition from wide to long using both the `tidyr` package as well as base R.
 
 First, lets take a look at each format and how they differ.
 
@@ -53,7 +53,7 @@ Generally, most of the datasets you work with in R will be in the long format.
 
 ## The Wide Data Format
 
-In the wide format, a subjects repeated responses will be in a single row. This will "group" all of the categorical data according to the subject.
+In the wide format, a subjects repeated responses will be in a single row. This will \"group\" all of the categorical data according to the subject.
 
 Because of this, data in the wide format will generally have less rows than its long format counterpart
 
@@ -98,7 +98,7 @@ For `pivot_longer()`:
 
 `cols` refer toi the specific columns we want to pivot. This should be all the columns that are not an ID
 
-`names_to` specifies what to name the new column that will be created. For example, column "v1/mean" refers to two attributes, a time and a statistic.
+`names_to` specifies what to name the new column that will be created. For example, column \"v1/mean\" refers to two attributes, a time and a statistic.
 
 `names_sep` details how the column names should be broken up. Is there a character we can use to separate the names? (Hint: What character separates the time and statistic?)
 
@@ -132,7 +132,7 @@ A non tidyverse approach to solve the same problem can be done using the `reshap
 
 Here is the documentation for it: https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/reshape
 
-You'll need to fill in the following arguments to get the desired result:
+You\'ll need to fill in the following arguments to get the desired result:
 
 
 `idvar` is the name of the column that is used to identify each of the subjects. In this case, we can use the subject IDs.
@@ -143,10 +143,9 @@ You'll need to fill in the following arguments to get the desired result:
 
 `timevar` is the name of the column that will hold the categorical attribute of our subject. We can leave it as "time" for now.
 
-`times` refers to the possible values the categorical obsvervation can take. In our case, we have four possible time values, so we'll need to pass in a vector with their names.\
+`times` refers to the possible values the categorical obsvervation can take. In our case, we have four possible time values, so we\'ll need to pass in a vector with their names.\
 
-`varying` requires a list of names of sets of variables in the wide format that correspond to single variables in long format. We can gather these names by searching for them using the "grep" function. You just need to
-fill in what names we are looking for.
+`varying` requires a list of names of sets of variables in the wide format that correspond to single variables in long format. We can gather these names by searching for them using the \"grep\" function. You just need to fill in what names we are looking for.
 
 See if you can fill in the missing arguments:
 
