@@ -1,6 +1,8 @@
 ---
-title: "UCR Statistics"
+title: "Wide to Long Data"
 author: "Christian Duenas"
+description: |
+  This tutorial shows how to convert data from wide to long and vice versa.
 date: "4/6/2021"
 output: learnr::tutorial
 runtime: shiny_prerendered
