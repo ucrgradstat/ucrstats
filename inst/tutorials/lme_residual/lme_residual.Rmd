@@ -167,10 +167,10 @@ By using the code from the previous section, we can now perform some residual di
 
 ```{r plot, exercise=TRUE}
 # Plot the fitted vs residual values
-plot() 
+#plot() 
 
 # Make a qqplot of the transformed residuals
-qqnorm() 
+#qqnorm() 
 ```
 
 ```{r plot-solution}
