@@ -113,8 +113,8 @@ See if you can fill in the blanks yourself (make sure you install tidyr):
 
 ```{r tidyverse, exercise = TRUE}
 library(tidyr)
-wide %>% tidyr::pivot_longer(cols= , names_to = c(), names_sep=) %>% 
-  pivot_wider(names_from = , values_from = ) -> new_long 
+#wide %>% tidyr::pivot_longer(cols= , names_to = c(), names_sep=) %>% 
+#  pivot_wider(names_from = , values_from = ) -> new_long 
 ```
 
 
@@ -153,11 +153,11 @@ See if you can fill in the missing arguments:
 # Covert our table to a dataframe using as.data.frame so that it works with reshape
 in_data <- as.data.frame(wide) 
 
-to_long <- reshape(data = in_data, direction = "long", idvar = "", sep ="", v.names = , 
-                   timevar = "time", times =,
-                   varying = list(grep(, colnames(in_data), value=T), grep(, colnames(in_data), value=T), grep(, colnames(in_data), value=T)))
-
-to_long # Print the result
+# to_long <- reshape(data = in_data, direction = "long", idvar = "", sep ="", v.names = , 
+#                    timevar = "time", times =,
+#                    varying = list(grep(, colnames(in_data), value=T), grep(, colnames(in_data), value=T), grep(, colnames(in_data), value=T)))
+# 
+# to_long # Print the result
 ```
 
 
