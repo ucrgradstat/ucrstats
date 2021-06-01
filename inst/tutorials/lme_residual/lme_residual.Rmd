@@ -63,6 +63,10 @@ t_fit <- L_inv %*% fitted_vals
 
 ## Introduction
 
+In this tutorial, we\'ll be discussing how we can perform residual diagnostics on our LME models by transforming and analyzing the residuals. We will code the transformation and then plot the results.
+
+### Our Assumptions
+
 Just like normal linear regression, we want to make sure that our LME models are a good fit for our data. Linear Regression had two important assumptions that needed to be verified:
 
 With residuals written as $r_{ij} = Y_{ij} - X_{ij}'\hat{\beta}$,
