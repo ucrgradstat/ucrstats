@@ -166,8 +166,8 @@ Hint: Think about how you would add a coefficient to the model using `lm()`
 
 
 ```{r firstLME, exercise = TRUE}
-my_model <- lme4::lmer(data = lme_one, formula = Y ~ 1)
-summary(my_model)
+#my_model <- lme4::lmer(data = lme_one, formula = Y ~ 1)
+#summary(my_model)
 ```
 
 ```{r firstLME-solution}
@@ -194,7 +194,7 @@ One important thing to note when adding random effects is that we usually need t
 Try making you\'re on models using the other variables in the dataset.
 
 ```{r tryit, exercise = TRUE}
-my_model <- lme4::lmer(data = lme_one) # Insert some variables into the formula
+#my_model <- lme4::lmer(data = lme_one) # Insert some variables into the formula
 #summary(my_model)
 ```
 
