@@ -4,7 +4,7 @@
 #'
 #' 
 #'
-#' @export
+#' 
 #'
 #' 
 available_tutorials <- function() {
