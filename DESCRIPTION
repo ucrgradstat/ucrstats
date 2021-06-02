@@ -1,6 +1,6 @@
 Package: ucrstats
 Title: UCR Statistics 
-Version: 0.0.13
+Version: 0.0.14
 Author: c(
   person("Isaac", "Quintanilla Salinas"),
   person("Christian", "Dueñas")
