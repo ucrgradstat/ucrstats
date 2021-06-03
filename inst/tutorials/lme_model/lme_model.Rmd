@@ -1,6 +1,8 @@
 ---
 title: "Linear Mixed Effects in R"
 author: "Christian Duenas"
+description: |
+  This tutorial details how to make Linear Mixed Effect Models in R
 date: "5/13/2021"
 output: learnr::tutorial
 runtime: shiny_prerendered
