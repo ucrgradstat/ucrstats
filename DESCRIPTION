@@ -1,11 +1,11 @@
 Package: ucrstats
 Title: UCR Statistics 
-Version: 0.0.15
+Version: 0.0.16
 Author: c(
   person("Isaac", "Quintanilla Salinas"),
   person("Christian", "Dueñas")
   )
-Maintainer: Isaac Quintanilla Salinas  <inqs909@gmail.com>
+Maintainer: Isaac Quintanilla Salinas  <inqs.909@gmail.com>
 Description: This package contains materials that can be used
 	to support students studying or interested in
 	Statistics at the University of California, 

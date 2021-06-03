@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ucrstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.16</span>
       </span>
     </div>
 
@@ -100,10 +100,13 @@ devtools::install_github("ucrgradstat/ucrstats")
 <div id="current-tutorials" class="section level2">
 <h2 class="hasAnchor">
 <a href="#current-tutorials" class="anchor"></a>Current tutorials</h2>
-<p>Tutorials can be accessed by using the <code>access_tutorial</code> function and inserting the tutorial name or “id” as an argument.</p>
+<p>Tutorials can be accessed by using the <code><a href="reference/access_tutorial.html">access_tutorial()</a></code> function and inserting the tutorial name or “id” as an argument.</p>
 <p>An example is shown below</p>
 <pre><code><a href="reference/access_tutorial.html"># This code would be used to access the tutorial on Linear Mixed Effects Models
 ucrstats::access_tutorial("lme_model")</a></code></pre>
+<p>To see the list of all tutorials and their corresponding ids, you can use the <code><a href="reference/list_tutorials.html">list_tutorials()</a></code> function.</p>
+<pre><code><a href="reference/list_tutorials.html"># This code would print out a table of all the tutorials currently available in the package
+ucrstats::list_tutorials()</a></code></pre>
 <div id="longitudinal-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#longitudinal-data" class="anchor"></a>Longitudinal Data</h3>
