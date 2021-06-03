@@ -1,6 +1,8 @@
 ---
 title: "Linear Mixed Effects Residual Analysis"
 author: "Christian Duenas"
+description: |
+  This tutorial details transform and analyze residuals of LME models in R
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
@@ -65,7 +67,7 @@ t_fit <- L_inv %*% fitted_vals
 
 In this tutorial, we\'ll be discussing how we can perform residual diagnostics on our LME models by transforming and analyzing the residuals. We will code the transformation and then plot the results.
 
-### Our Assumptions
+## Diagnostics
 
 Just like normal linear regression, we want to make sure that our LME models are a good fit for our data. Linear Regression had two important assumptions that needed to be verified:
 

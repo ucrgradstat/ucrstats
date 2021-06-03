@@ -1,6 +1,8 @@
 ---
 title: "Linear Mixed Effects in R"
 author: "Christian Duenas"
+description: |
+  This tutorial details how to make Linear Mixed Effect Models in R
 date: "5/13/2021"
 output: learnr::tutorial
 runtime: shiny_prerendered
@@ -35,7 +37,7 @@ library(lme4)
 In this tutorial, we\'ll be discussing how we can create a linear mixed effects model using the `lme4` package. We\'ll also talk about some of the theory behind the model.
 
 
-### Why Linear Mixed Effects
+## Why Linear Mixed Effects
 
 Up to this point, you\'ve likely been using linear models to model your data. Perhaps it looks something like 
 
