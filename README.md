@@ -27,13 +27,20 @@ Make sure to update R as well.
 
 ## Current tutorials 
 
-Tutorials can be accessed by using the `access_tutorial` function and inserting the tutorial name or "id" as an argument.
+Tutorials can be accessed by using the `access_tutorial()` function and inserting the tutorial name or "id" as an argument.
 
 An example is shown below
 
 ```
 # This code would be used to access the tutorial on Linear Mixed Effects Models
 ucrstats::access_tutorial("lme_model")
+```
+
+To see the list of all tutorials and their corresponding ids, you can use the `list_tutorials()` function.
+
+```
+# This code would print out a table of all the tutorials currently available in the package
+ucrstats::list_tutorials()
 ```
 
 ### Longitudinal Data
