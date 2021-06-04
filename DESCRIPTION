@@ -1,9 +1,9 @@
 Package: ucrstats
-Title: UCR Statistics 
+Title: UCR Stats R Package 
 Version: 0.0.16
-Author: c(
-  person("Isaac", "Quintanilla Salinas"),
-  person("Christian", "Dueñas")
+Authors@R: c(
+  person("Isaac", "Quintanilla Salinas", role = c("aut","cre"), email = "inqs.909@gmail.com"),
+  person("Christian", "Dueñas", role = "aut")
   )
 Maintainer: Isaac Quintanilla Salinas  <inqs.909@gmail.com>
 Description: This package contains materials that can be used
