@@ -1,6 +1,6 @@
 Package: ucrstats
 Title: UCR Stats R Package 
-Version: 0.0.16
+Version: 0.1.0
 Authors@R: c(
   person("Isaac", "Quintanilla Salinas", role = c("aut","cre"), email = "inqs.909@gmail.com"),
   person("Christian", "Dueñas", role = "aut")
