@@ -27,9 +27,7 @@ library(tidyr)
 # #load("ucrstats/data/long.RData")
 ```
 
-# Converting Data from Wide To Long
-
-
+# Converting Data from Wide to long
 
 ## Introduction
 

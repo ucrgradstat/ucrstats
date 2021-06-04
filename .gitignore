@@ -2,5 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-inst/doc
-inst/tutorials/*/*.html
+inst/tutorials/lme_model/lme_model.html
+inst/tutorials/lme_residual/lme_residual.html
+inst/tutorials/wide_to_long/wide_to_long.html
