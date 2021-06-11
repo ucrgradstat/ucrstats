@@ -23,7 +23,7 @@ library(ucrstats)
 
 ## Accessing tutorials 
 
-Tutorials can be accessed by place the tutorial name or "id" into the `access_tutorial` function. The different tutorials are listed below, with the names/ids shown in parentheses. 
+Tutorials can be accessed by placing the tutorial name or "id" into the `access_tutorial` function. The different tutorials are listed below, with the names/ids shown in parentheses. 
 
 ```{r, eval=FALSE}
 # This code would be used to access the tutorial on Linear Mixed Effects Models

@@ -1,0 +1,397 @@
+---
+title: "Multivariable Linear Regression"
+author: "Isaac Quintanilla Salinas"
+description: |
+  This tutorial details how to conduct a multiple linear regression model in R.
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+
+Y <- mtcars$mpg
+XX <- cbind(rep(1,length(Y)),mtcars$hp, mtcars$cyl, mtcars$wt, mtcars$disp)
+
+xlm <- lm(mpg ~ hp + cyl + wt + disp, data = mtcars)
+beta_lm <- coef(xlm)
+beta_se <- sqrt(diag(vcov(xlm)))
+
+X1 <- c(1, 110, 6, 2.62, 160)
+Xp <- c(1, 120, 6, 3, 200)
+
+MSE <- summary(xlm)$sigma^2
+DFE <- xlm$df.residual
+beta_cov <- vcov(xlm)
+ey_se <- sqrt(t(X1) %*% beta_cov %*% X1)
+py_se <- sqrt(MSE + t(Xp) %*% beta_cov %*% Xp)
+```
+
+## Introduction
+
+This tutorial focuses on multi linear regression in R. **You only need to do section 1 and 2 to learn how to do MLR in R.**
+
+For this tutorial, we will use the `mtcars` data set with the dependent variable being `mpg` and the independent variables being `hp`, `cyl`, `wt`, and `disp`.
+
+Through out this tutorial, we use certain notations for different components in R. To begin, when something is in a gray block, `_`, this indicates that R code is being used. When I am talking about an R Object, it will be displayed as a word. For example, we will be using the R object `mtcars`. When I am talking about an R function, it will be displayed as a word followed by an open and close parentheses. For example, we will use the mean function denoted as `mean()` (read this as "mean function"). When I am talking about an R argument for a function, it will be displayed as a word following by an equal sign. For example, we will use the data argument denoted as `data=` (read this as "data argument"). When I am referencing an R package, I will use `::` (two colons) after the name. For example, in this tutorial, I will use the `ggplot2::` (read this as "ggplot2 package") Lastly, if I am displaying R code for your reference or to run, it will be displayed on its own line. There are many components in R, and my hope is that this will help you understand what components am I talking about.
+
+## Multivariable Linear Regression
+
+Simple linear regression uses a model with one independent variable:
+
+$$
+Y = \beta_0 + \beta_1 X_1.
+$$
+
+The multivariable linear regression extends the model to include more than independent variable:
+
+$$
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p,
+$$
+
+and in matrix form:
+
+$$
+Y = \boldsymbol X ^ \mathrm T \boldsymbol \beta,
+$$
+
+where
+
+$$
+\boldsymbol \beta = \left(
+\begin{array}{c}
+\beta_0 \\
+\beta_1 \\
+\beta_2 \\
+\vdots \\
+\beta_p
+\end{array}
+\right)
+$$
+
+and
+
+$$
+\boldsymbol X = \left(\begin{array}{cc}
+1 & X_{11} & X_{21} & \cdots & X_{p1}\\
+1 & X_{12} & X_{23} & \cdots & X_{p2}\\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & X_{1n} & X_{2n} & \cdots & X_{pn}\\
+\end{array}
+\right).
+$$
+
+To fit the data to the model, we search for values of $\hat \beta$ that minimizes the least-squares formula:
+
+$$
+\sum^n_{i=1} \left( Y_i - \boldsymbol X_i ^ \mathrm T \boldsymbol \beta \right)^2
+$$
+
+For the rest of the tutorial, we will go over how to find the estimates of $\beta$
+
+## MLR with `lm()`
+
+First, we are interested in fitting the model below:
+
+$$
+mpg = \beta_0 + \beta_1 \cdot hp +\beta_2 \cdot cyl + \beta_3 \cdot wt + \beta_4 \cdot disp.
+$$
+
+The outcome variable is `mpg`, and the independent variables are `hp`, `cyl`, `wt`, and `disp`. Fitting a multivariable linear regression in R is done with the `lm()`. We just need to specify the `formula=` and the `data=`. Similar to the simple linear regression model, the `formula=` contains the outcome on side of the `~` and the independent variables are on the other side. The independent variable are added to each other using the `+` operator. For example, the `formula=` is coded as
+
+    mpg ~ hp + cyl + wt + disp
+
+Using the formula above, fit a model with the outcome variable is `mpg` and the independent variables are `hp`, `cyl`, `wt`, and `disp` from the `mtcars` data set.
+
+```{r mlr1_1, exercise = TRUE}
+
+```
+
+```{r mlr1_1-solution}
+xlm <- lm(mpg ~ hp + cyl + wt + disp, data = mtcars)
+```
+
+Lastly, we can obtain organized output using the `summary()`. Obtain the summary for `xlm`.
+
+```{r mlr1_2, exercise = TRUE}
+
+```
+
+```{r mlr1_2-solution}
+summary(xlm)
+```
+
+## MLR Statistics
+
+### ANOVA Table
+
+To obtain the anova table associated with the linear regression model, use the `anova()` on the object generated from the `lm()`. Generate the anova table from the `xlm` object.
+
+```{r mlr2_1, exercise = TRUE}
+
+```
+
+```{r mlr2_1-solution}
+anova(xlm)
+```
+
+### Coefficient of Determination
+
+In R, $R^2$ is an element from a list produced from the `summary()`. Therefore, you will need to first apply the `summary()` to the R object, `xlm`, then you will select the element `r.squared`. Obtain the $R^2$ from the `xlm` object.
+
+```{r mlr2_2, exercise = TRUE}
+
+```
+
+```{r mlr2_2-solution}
+summary(xlm)$r.squared
+```
+
+The $R^2_a$ is obtained the same way as $R^2$. The only difference is that the element is now called `adj.r.squared`. Obtain the $R^2_a$ from the `xlm` object.
+
+```{r mlr2_3, exercise = TRUE}
+
+```
+
+```{r mlr2_3-solution}
+summary(xlm)$adj.r.squared
+```
+
+### $\widehat{cov}(\hat \beta)$
+
+The estimated covariance matrix of $\hat \beta$ can be obtained with the `vcov()` on an R object containing the output from the `lm()`. Obtain the covariance matrix of $\hat \beta$ from `xlm`.
+
+```{r mlr2_4, exercise = TRUE}
+
+```
+
+```{r mlr2_4-solution}
+vcov(xlm)
+```
+
+### MSE $\hat \sigma^2$
+
+The mean squared error is obtained the same way as $R^2$. However, R only provides $\hat \sigma$. Therefore, you will need to square it. To obtain $\hat \sigma$, call the element `sigma`. Produce the mean squared error from `xlm`.
+
+```{r mlr2_5, exercise = TRUE}
+
+```
+
+```{r mlr2_5-solution}
+summary(xlm)$sigma^2
+```
+
+### Model Degrees of Freedom
+
+The degrees of freedom for the mean squared error is an element in the R object from the `lm()`. The element is labeled as `df.residual`. Obtain the degrees of freedom from the `xlm` object.
+
+```{r mlr2_6, exercise = TRUE}
+
+```
+
+```{r mlr2_6-solution}
+xlm$df.residual
+```
+
+## Confidence Intervals
+
+### $\beta$
+
+There are times where you may be interested in obtaining the confidence intervals of $\beta$. Here we will walk through how to compute these confidence intervals.
+
+First, you will need to obtain the estimated values of the coefficients. You can get the values from `xlm` using the `coef()`. Obtain the estimated values and store it in an R object called `beta_lm`.
+
+```{r mlr3_1, exercise = TRUE}
+
+```
+
+```{r mlr3_1-solution}
+beta_lm <- coef(xlm)
+```
+
+Now, you will need to obtain the standard errors for each coefficient. First we will need to obtain the variances for each regression coefficient. These are obtained from the diagonal elements of $\widehat{cov}(\hat \beta)$. To obtain diagonal elements from a square matrix, use the `diag()`. After, you will need to square root the values. Now create a vector containing all the standard errors for each regression coefficient.
+
+```{r mlr3_2, exercise = TRUE}
+
+```
+
+```{r mlr3_2-solution}
+beta_se <- sqrt(diag(vcov(xlm)))
+```
+
+Obtain the degrees of freedom for the residuals and store it in an R object called `DFE`.
+
+```{r mlr3_3, exercise = TRUE}
+
+```
+
+```{r mlr3_3-solution}
+DFE <- xlm$df.residual
+```
+
+Lastly, obtain the upper and lower bounds for each coefficient.
+
+```{r mlr3_4, exercise = TRUE}
+
+```
+
+```{r mlr3_4-solution}
+beta_lm - qt(.975, DFE) * beta_se
+beta_lm + qt(.975, DFE) * beta_se
+```
+
+### $\hat Y$
+
+#### Estimated
+
+Let $\hat Y_1$ be the estimated value from the fitted model for the first observation in the `mtcars` data set. The predictor variables for this observation is denoted as
+
+$$
+X_1 = \left(
+\begin{array}{c}
+1 \\
+110 \\
+6 \\
+2.62 \\
+160 \\
+\end{array}
+\right).
+$$
+
+Construct a vector containing all the values above and store it in an R object called `X1`.
+
+```{r mlr3_5, exercise = TRUE}
+
+```
+
+```{r mlr3_5-solution}
+X1 <- c(1, 110, 6, 2.62, 160)
+```
+
+##### Standard Error for $\hat Y_1$
+
+```{r mlrq3_1}
+question("What is the formula for the standard error of an estimated $\\hat Y_1$?",
+         answer("$\\sqrt {MSE \\cdot X_1^\\mathrm T (\\boldsymbol X ^ \\mathrm T \\boldsymbol X )^{-1} X_1}$", correct = TRUE, message = " For practice, find $Var(\\hat Y_1 )$."),
+         answer("$\\sqrt {MSE \\left( \\frac{1}{n} + X_1^\\mathrm T (\\boldsymbol X ^ \\mathrm T \\boldsymbol X )^{-1} X_1 \\right)}$"),
+         answer("$\\sqrt {MSE \\left(1 + X_1^\\mathrm T (\\boldsymbol X ^ \\mathrm T \\boldsymbol X )^{-1} X_1 \\right)}$"),
+         answer("$\\sqrt {MSE \\left(1 + \\frac{1}{n} + X_1^\\mathrm T (\\boldsymbol X ^ \\mathrm T \\boldsymbol X )^{-1} X_1 \\right)}$"),
+         incorrect = "Find $Var(\\hat Y_1 )$.",
+         allow_retry = TRUE
+         )
+```
+
+To calculate the standard error, we are going to use the $\widehat{cov}(\hat \beta)$ instead of the formula above. If you found $Var(\hat Y)$, you will notice that one step involves the $cov(\hat \beta)$. Therefore, we can state the standard error as
+
+$$
+SE(\hat Y_1) = \sqrt{X_1^\mathrm T \widehat{cov}(\hat \beta)X_1}.
+$$
+
+Using the formula above, all we need to do is obtain $\widehat{cov}(\hat \beta)$. Obtain $\widehat{cov}(\hat \beta)$ and store it in an R object called `beta_cov`.
+
+```{r mlr3_6, exercise = TRUE}
+
+```
+
+```{r mlr3_6-solution}
+beta_cov <- vcov(xlm)
+```
+
+Now using `beta_cov`, obtain the standard error of $\hat Y_1$ and store it an R object called `ey_se`. Remember to use the `t()` and `%*%` operator.
+
+```{r mlr3_7, exercise = TRUE}
+
+```
+
+```{r mlr3_7-solution}
+ey_se <- sqrt(t(X1) %*% beta_cov %*% X1)
+```
+
+Now that you have the essential components, calculate the $95\%$ CI of $\hat Y_1$.
+
+```{r mlr3_8, exercise = TRUE}
+
+```
+
+```{r mlr3_8-solution}
+X1 %*% beta_lm + c(-1, 1) * qt(.975, DFE) * ey_se
+```
+
+#### Predicted
+
+Let $\hat Y_p$ be the predicted value from the fitted model when using new values for the predictor variables:
+
+$$
+X_p = \left(
+\begin{array}{c}
+1 \\
+120 \\
+6 \\
+3 \\
+200 \\
+\end{array}
+\right).
+$$
+
+Construct a vector containing all the values above and store it in an R object called `Xp`.
+
+```{r mlr4_0, exercise = TRUE}
+
+```
+
+```{r mlr4_0-solution}
+Xp <- c(1, 120, 6, 3, 200)
+```
+
+##### 
+
+##### Standard Error for $\hat Y_p$
+
+```{r mlrq4_1}
+
+question("What is the formula for the standard error of the predicted $\\hat Y_p$?",
+         answer("$\\sqrt {MSE \\cdot X_p^\\mathrm T (\\boldsymbol X ^ \\mathrm T \\boldsymbol X )^{-1} X_p}$"),
+         answer("$\\sqrt {MSE \\left( \\frac{1}{n} + X_p^\\mathrm T (\\boldsymbol X ^ \\mathrm T \\boldsymbol X )^{-1} X_p \\right)}$"),
+         answer("$\\sqrt {MSE \\left(1 + X_p^\\mathrm T (\\boldsymbol X ^ \\mathrm T \\boldsymbol X )^{-1} X_p \\right)}$", correct = TRUE, message = "For practice, find $Var(Y_p - \\hat Y_p )$."),
+         answer("$\\sqrt {MSE \\left(1 + \\frac{1}{n} + X_p^\\mathrm T (\\boldsymbol X ^ \\mathrm T \\boldsymbol X )^{-1} X_p \\right)}$"),
+         incorrect = "Find $Var(Y_p - \\hat Y_p )$.",
+         allow_retry = TRUE
+         )
+```
+
+Similar to calculating the standard error of $\hat Y_1$, we will calculate the the standard error for $\hat Y_p$ using $\widehat{cov}(\hat \beta)$. If you found $Var(Y_p - \hat Y_p)$, you obtained the following form:
+
+$$
+Var(Y_p - \hat Y_p)= \sigma^2 + X_p^\mathrm T cov(\hat \beta) X_p
+$$
+
+All we need to do is replace all the parameters with their corresponding estimates. First, obtain the estimate of $\sigma^2$. Store the value is an R object called `MSE`.
+
+```{r mlr3_9, exercise = TRUE}
+
+```
+
+```{r mlr3_9-solution}
+MSE <- summary(xlm)$sigma^2
+```
+
+Obtain the standard error for $Y_p-\hat Y_p$ and store it in an R object called `py_se`.
+
+```{r mlr3_10, exercise = TRUE}
+
+```
+
+```{r mlr3_10-solution}
+py_se <- sqrt(MSE + t(Xp) %*% beta_cov %*% Xp)
+```
+
+Lastly, obtain the $95\%$ PI for $\hat Y_p$.
+
+```{r mlr3_11, exercise = TRUE}
+
+```
+
+```{r mlr3_11-solution}
+Xp %*% beta_lm + c(-1, 1) * qt(.975, DFE) * py_se
+```

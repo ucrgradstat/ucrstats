@@ -1,0 +1,237 @@
+---
+title: "Residual Analysis"
+author: "Isaac Quintanilla Salinas"
+description: |
+  This tutorial details how to conduct a residual analysis in R.
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+knitr::opts_chunk$set(echo = FALSE)
+xlm <- lm(mpg~hp+cyl+wt+disp, data = mtcars)
+```
+
+## Introduction
+
+This tutorial focuses on conducting a residual analysis for your model. Residual analysis is used to assess the fit of the model.
+
+For this tutorial, we will use the `mtcars` data set with the dependent variable being `mpg` and the independent variables being `hp`, `cyl`, `wt`, and `disp`.
+
+Through out this tutorial, we use certain notations for different components in R. To begin, when something is in a gray block, `_`, this indicates that R code is being used. When I am talking about an R Object, it will be displayed as a word. For example, we will be using the R object `mtcars`. When I am talking about an R function, it will be displayed as a word followed by an open and close parentheses. For example, we will use the mean function denoted as `mean()` (read this as "mean function"). When I am talking about an R argument for a function, it will be displayed as a word following by an equal sign. For example, we will use the data argument denoted as `data=` (read this as "data argument"). When I am referencing an R package, I will use `::` (two colons) after the name. For example, in this tutorial, I will use the `ggplot2::` (read this as "ggplot2 package") Lastly, if I am displaying R code for your reference or to run, it will be displayed on its own line. There are many components in R, and my hope is that this will help you understand what components am I talking about.
+
+## Residuals
+
+### Regression Residual
+
+Given the fitted model below:
+
+$$
+\hat Y_i=\hat\beta_0+\hat \beta_1 X_1+\cdots+\hat\beta_pX_p
+$$
+
+The regression residual is defined as
+
+$$
+\hat e_i = Y_i-\hat Y_i.
+$$
+
+### Standardized Residual
+
+The standardized residual is the residual divided by the model's standard deviation:
+
+$$
+s=\sqrt\frac{\sum_{i=1}^n\hat e_i^2}{n-(k+1)},
+$$
+
+where $k$ is the number of predictors in the model. The standardized residual is defined as
+
+$$
+\hat z_i=\frac{\hat e_i}{s}
+$$
+
+### Leverage Values
+
+The leverage of an observation that measures the influence of $Y_i$ on the fitted value $\hat Y_i$. The leverage value, $h_i$, is the weight associated to $Y_i$ to the equation
+
+$$
+\hat Y_i = h_1Y_1+h_2Y_2+\cdots+h_iY_i+\cdots+h_nY_n.
+$$ The value of $h_i$ can be obtained from the diagonal element of $n\times n$ matrix $H$:
+
+$$
+h_i=\left[H\right]_{ii}
+$$
+
+The matrix $H$ is obtained as
+
+$$
+H= X(X^\mathrm TX)^{-1}X.
+$$
+
+### Studentized Residuals
+
+The studentized residual is defined as
+
+$$
+\hat z^*_i=\frac{\hat e_i}{s\sqrt{1-h_i}}.
+$$
+
+### Jackknife Residual
+
+The jackknife residual for each $i^{th}$ observation measures its influence on the regression model. To obtain the jackknife residual, first fit the regression model without the $i^{th}$ observations. Then, predict the value $\hat Y_{(i)}$ using the fitted regression model. Lastly, the jackknife residual is defined as
+
+$$
+d_i = Y_i-\hat Y_{(i)}.
+$$
+
+### Cook's Distance
+
+Cook's distance provides a measurement of the overall influence of estimate the regression parameters from an observation. Cook's distance, $D_i$ is defined as
+
+$$
+D_i=\frac{\hat e_i^2}{(k+1)s^2}\left\{\frac{h_i}{(1-h_i)^2}\right\}.
+$$
+
+## Residuals in R
+
+### Model
+
+To begin, fit a linear regression model where the variable `mpg` is regressed on the variables `hp`, `cyc`, `wt`, and `disp`. Store the output in an R object called `xlm`.
+
+```{r rrm_1, exercise = TRUE}
+
+```
+
+```{r rrm_1-solution}
+xlm <- lm(mpg~hp+cyl+wt+disp, data = mtcars)
+```
+
+### Fitted Values
+
+To obtain the fitted values from a model, use the `fitted()`. It only needs an R object of class `lm()`. Find the fitted values from the `xlm` object.
+
+```{r rrf_1, exercise = TRUE}
+
+```
+
+```{r rrf_1-solution}
+fitted(xlm)
+```
+
+### Regression Residuals
+
+The regression residuals are obtained from the model using the `resid()`. It only needs an R object of class `lm()`. Find the regression residual values from the `xlm` object.
+
+```{r rrrr_1, exercise = TRUE}
+
+```
+
+```{r rrrr_1-solution}
+resid(xlm)
+```
+
+### Standardized Residual
+
+To obtain the standardized residuals from your book, you will need to manually calculate it. Use the `resid()` and the `summary()` to obtain the residuals and standard error for the model.
+
+```{r rrsr_1, exercise = TRUE}
+
+```
+
+```{r rrsr_1-solution}
+resid(xlm)/summary(xlm)$sigma
+```
+
+### Studentized Residual
+
+The studentized residuals are obtained from the model using the `rstandard()`. It only needs an R object of class `lm()`. Find the studentized residuals from the `xlm` object.
+
+```{r rrsr_2, exercise = TRUE}
+
+```
+
+```{r rrsr_2-solution}
+rstandard(xlm)
+```
+
+### Leverage Values
+
+The leverage values are obtained from the model using the `hatvalues()`. It only needs an R object of class `lm()`. Find the leverage values from the `xlm` object.
+
+```{r rrlv_1, exercise = TRUE}
+
+```
+
+```{r rrlv_1-solution}
+hatvalues(xlm)
+```
+
+### Jackknife Residual
+
+The jackknife residuals are obtained from the model using the `rstudent()`. It only needs an R object of class `lm()`. Find the jackknife residuals from the `xlm` object.
+
+```{r rrj_1, exercise = TRUE}
+
+```
+
+```{r rrj_1-solution}
+rstudent(xlm)
+```
+
+### Cook's Distance
+
+The Cook's distance values are obtained from the model using the `cooks.distance()`. It only needs an R object of class `lm()`. Find the Cook's Distance values from the `xlm` object.
+
+```{r rrc_1, exercise = TRUE}
+
+```
+
+```{r rrc_1-solution}
+cooks.distance(xlm)
+```
+
+## Residual Plots
+
+Once you know how to obtain the residuals, you can create the different plots using the `plot()`. Plot the fitted vs residual plot from the `xlm` object. Feel free to use the `ggplot2::`.
+
+```{r rrp_1, exercise = TRUE}
+
+```
+
+```{r rrp_1-solution}
+plot(fitted(xlm), resid(xlm))
+
+## OR
+
+ggplot(data.frame(x = fitted(xlm), y = resid(xlm)),
+       aes(x = x, y = y)) + geom_point()
+```
+
+Now add a horizontal line at y=0.
+
+```{r rrp_2, exercise = TRUE}
+
+```
+
+```{r rrp_2-solution}
+plot(fitted(xlm), resid(xlm))
+abline(v=0)
+
+## OR
+
+ggplot(data.frame(x = fitted(xlm), y = resid(xlm)),
+       aes(x = x, y = y)) + geom_point() +
+       geom_hline(yintercept=0)
+```
+
+R provides many diagnostic plots when using the `plot()`. Place the `xlm` object in the `plot()` and see which plots are provided.
+
+```{r rrp_4, exercise = TRUE}
+
+```
+
+```{r rrp_4-solution}
+plot(xlm)
+```

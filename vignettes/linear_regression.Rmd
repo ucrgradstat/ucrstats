@@ -1,0 +1,45 @@
+---
+title: "Linear Regression"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{linear_regression}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ucrstats)
+```
+
+## Accessing tutorials 
+
+Tutorials can be accessed by placing the tutorial name or "id" into the `access_tutorial` function. The different tutorials are listed below, with the names/ids shown in parentheses. 
+
+```{r, eval=FALSE}
+access_tutorial("R_SLR")
+```
+
+
+## Available Tutorials 
+
+*The following are tutorials on linear regression.*
+
+### Simple Linear Regression (R_SLR)
+
+This tutorial provides the basic information on linear relationships between two variables and conducting a simple linear regression model in R.
+
+### Multiple Linear Regression (R_MLR)
+
+This tutorial provides the basic information to conduct a multiple linear regression model in R.
+
+### Linear Regression Residual Analysis (R_Resid)
+
+This tutorial provides the basic code to conduct a residual analysis from a linear regression model.
+

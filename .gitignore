@@ -4,3 +4,4 @@
 .Ruserdata
 inst/tutorials/**/*.html
 
+inst/doc

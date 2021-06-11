@@ -2,6 +2,7 @@ pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
+  linear_regression: linear_regression.html
   longitudinal: longitudinal.html
-last_built: 2021-06-04T18:38Z
+last_built: 2021-06-11T01:34Z
 

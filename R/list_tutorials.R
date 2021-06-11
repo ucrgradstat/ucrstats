@@ -8,6 +8,6 @@
 #'
 #' 
 list_tutorials <- function() {
-  return( ucrstats::tutorials)
+  return(ucrstats::tutorials)
 }
 

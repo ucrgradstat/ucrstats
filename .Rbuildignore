@@ -5,3 +5,4 @@
 ^pkgdown$
 ^index.Rmd$
 ^index.md$
+^R/tutorials_data\.R$
