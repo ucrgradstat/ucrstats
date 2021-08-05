@@ -13,51 +13,71 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Introduction to Survival Analysis
 
-### Why Survival
+Survival Analysis is all about studying the time-to-event. When your research question is in the form of \"how long does it take until a certain event occurs,\" Survival Analysis is usually an appropriate route. 
 
+### Time and Events
 
+When formulating our research question, there is a couple things we need to keep in mind:
 
-### Exercise with Code
++ **The event needs to be clearly defined**
+    + In the context of medical studies, a common event is death (hence the name \"survival\")
+    + However, survival methods are not limited to death. The event of interest could be anything, from graduating college, failure of a mechanism, recovery from a substance, etc.
+    
++ **Time Origin and Scale should be relevant to the study**
 
+    + The time origin should begin at the appropriate. It does not make much sense to use the 19th century as the time origin of a study that starts today. 
+    + What is the scale? Minutes? Days? Months? Years? Make sure the scale makes sense with the research question
+    + How long is the study going to last, or when will it end? This will be an important consideration later when we talk about censoring.
 
-## Important Functions
-
-### Exercise with Hint
-
-*Here's an exercise where the chunk is pre-evaulated via the `exercise.eval` option (so the user can see the default output we'd like them to customize). We also add a "hint" to the correct solution via the chunk immediate below labeled `print-limit-hint`.*
-
-Modify the following code to limit the number of rows printed to 5:
-
-```{r print-limit, exercise=TRUE, exercise.eval=TRUE}
-mtcars
-```
-
-```{r print-limit-hint}
-head(mtcars)
-```
-
-### Quiz
-
-*You can include any number of single or multiple choice questions as a quiz. Use the `question` function to define a question and the `quiz` function for grouping multiple questions together.*
-
-Some questions to verify that you understand the purposes of various base and recommended R packages:
-
-```{r quiz}
+```{r, quiz1}
 quiz(
-  question("Which package contains functions for installing other R packages?",
-    answer("base"),
-    answer("tools"),
-    answer("utils", correct = TRUE),
-    answer("codetools")
-  ),
-  question("Which of the R packages listed below are used to create plots?",
-    answer("lattice", correct = TRUE),
-    answer("tools"),
-    answer("stats"),
-    answer("grid", correct = TRUE)
+  question("We are given data on workers at a chemical plant that contains substances known to cause cancer. We are interested in seeing the relationship between time and death from cancer in the context of the chemical plant.\n Which of the following would be the best time origin for this study?",
+    answer("When the particpant is born"),
+    answer("The particpant's last day working at the plant"),
+    answer("The first day the participant begins their job at the plant", correct = TRUE),
+    answer("The first day the particpant starts to notice cancer symptoms")
   )
 )
 ```
+
+
+## Four Important Functions
+
+When working with survival models, we can characterize their distributions with four important functions:
+
+### The Survival function - $S(t)$
+
+### The hazard function - $h(t)$
+
+### The Cumulative Hazard function $H(t)$
+
+### The Probability Density/Mass function $f(t)$
+
+### Know one? You Know them all!
+
+
+## Censoring
+
+When working with any statistical method, missing data will usually be a common issue. Because we don\'t have unlimited resources, studies can typically only last a certain amount of time. Therefore, it is fairly common for an event to not be observed during the duration of the study. In the context of survival, we refer to this missing data problem as **censoring**.
+
+We can consider a few different types of censoring
+
+### Right Censoring
+
+Right censoring occurs when the subject does not experience the event of interest within the period of the study. In practice, many research projects have a limited amount of funds,time, and resources. So it is entirely possible that the allotted time period may not be enough to observe the event in all participants.
+
+This doesn\'t mean the event will never occur. For example, consider a ten-year study on the time until death for subjects who receive a kidney transplant. Death is essentially guaranteed for all participants, but some subjects may have live longer than ten years from when the study begins. We can further break down right censoring into two types:
+
++ Type I Right Censoring
+
++ Type II Right Censoring
+
+
+### Left Censoring 
+
+
+### Interval Censoring
+
 
 ## Parametric Models
 
