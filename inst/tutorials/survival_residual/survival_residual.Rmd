@@ -1,28 +1,95 @@
 ---
-title: "Survival Analysis - Model Diagnostics"
-output: html_document
+title: "Tutorial"
+output: learnr::tutorial
+runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+library(learnr)
+library(survival)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## Martingale Residuals
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Martingale residuals can be used to to examine overall model fit and check if any covariates need to be transformed. They are defined as follows:
 
-```{r cars}
-summary(cars)
-```
+$r_{m_i} = \delta_i - \hat{H}(t_i | x_i)$ where
 
-## Including Plots
+$\delta_i$ is the event indicator
 
-You can also embed plots, for example:
+$\hat{H}(t_i | x_i)$ is the estimated cumulative hazard risk for an individual. It can also be written as $\hat{H}(t_i | x_i) = \hat{H_0}(t)exp(x_i^T\beta)$
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+These residuals have the following properties:
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
++ Mean centered at 0
++ Uncorrelated across all subjects
++ Range from $-\infty$ to 1
++ Not Symmetric, heavily negatively skewed
++ For large samples, the residuals are a [Martingale Sequence](https://en.wikipedia.org/wiki/Martingale_(probability_theory))
+
+### Checking for Transformation
+
+## Deviance Residuals
+
+Deviance Residuals are used to help us identify outliers in our data. As opposed to the left skewed Martingale residuals, deviance residuals are approximately normal. This allows us to identify outliers when the residuals lie outside a certain interval (i.e\. [-3,3]). They are defined as follows:
+
+$r_{d_{i}} = sign(r_{m_i})[-2 \{ r_{m_i} + \delta_ilog(\delta_i-r_{m_i}) \} ]$
+
+Deviance Residuals have the following properties:
+
++ Roughly symmetrically distributed around 0
++ Approximate standard deviation of 1.0
++ Approximately Normal Distribution
++ If the deviance residual is positive, then it indicates the event occurred sooner than expected
++ If the deviance residual is negative, then it indicates the event occurred later than expected
+
+### An Outlier was Identified, Now What?
+
+Do not just discard outliers! If you notice an outlier in the data, you want to find out why that outlier is the way it is (perhaps a data entry issue?), and if it has any influence on the model. Influence will be discussed in detail within the next section.
+
+
+
+
+## Score Residuals
+
+### Assessment of Influence
+
+Influence describes how a particular observations effects our covariate estimates $\hat{\beta}$
+
+To assess influence, we need to also define **leverage**. An observation with high leverage is unusual with respect to the covariate vector $X_i$
+
+Influence can then be defined as the combination of leverage and the Martingale Residuals
+
++ Each covariate receives a set of score residuals. So if we have n observations and p covariates, we have a total of $n \times p$ score residuals.
+
+## Proportional Hazards Assumption
+
+When working with our Cox-Proportional models, we make the key assumption that the hazard of one model is proportional to another. In other words, we assume $h_1(t) = \phi h_0(t)$, where $\phi$ is a constant value. If the property holds and we plotted both hazard functions, we would expect the curves to be parallel.
+
+We can test this assumption using the **Schoenfeld residuals**. These can be defined as 
+
+$r_{s,k}(\beta) = \sum\limits_{i \in R(t_k)} \delta_i \{ x_i - \bar{x}(\beta,t_k)  \}$ where $\bar{x}(\beta,t_k)$ is the weighted average of the covariate values for members of the risk set at time $t_k$ 
+
++ $\bar{x}(\beta,t_k) = \sum x_J W_j(\beta,t_k)$, where $W_j = \frac{exp(x_J^T\beta)}{\sum\limits_{J \in R}exp(x_J^T\beta)}$
+
+We can test this assumption using the `cox.zph()` function in the `survival` package. The following hypothesis test is performed:
+
+$H_0$: $\phi$ is time-invariant
+$H_A$: The proportional hazards assumption fails
+
+
+### What if the PH assumption fails?
+
+If the assumption fails, we can attempt to remedy this by stratifying our model and then reconstructing our estimates. 
+
++ If the covariate is categorical, we can stratify it by each group
+
++ If the covariate is quantitative, we may need to make it categorical by breaking the observations into intervals
+
+
+
+
+
+
