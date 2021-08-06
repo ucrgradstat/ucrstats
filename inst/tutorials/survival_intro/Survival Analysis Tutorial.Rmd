@@ -47,18 +47,62 @@ When working with survival models, we can characterize their distributions with 
 
 ### The Survival function - $S(t)$
 
-### The hazard function - $h(t)$
+The Survival function, $S(t)$ takes in a specified time $t_k$ and returns the probability that a subject will survive (or not experience the event) to time $t_k$. It can be defined as follows:
+
+$S(t) = Pr(X > t)$ where $T$ is a random variable.
+
+The survival function has these following properties:
+
++ The Survival function is the complement of the Cumulative Density function $F(t)$. We can write it as: $S(t) = 1 - F(t)$
+
++ Using the result above, we can show that $f(t) = - \frac{dS(t)}{dt}$
+
++ If our random variable $T$ is continuous, then $S(T)$ is a continuous and strictly decreasing function.
+
++ As time increases, the probability that individual experiences the event increases (Or the probability that the individual \"survives\" the event decreases).
+
++ At time t= 0, the survival function is equal to one ($S(0)=1$). The intuition here is that when no time has passed, all participants should be alive at the start.
+
++ As time approaches infinity, the survival curve $S(t)$ approaches zero (everybody has to die someday).
+
+### The Hazard Function - $h(t)$
+
+The hazard function (otherwise known as the hazard rule/risk) takes in a time $t_k$ and returns the chance that the individual will experience the event at the next instant, *given that they have survived up to time $t_k$*. Note that this is a conditional probability. Outr hazard function can be defined as:
+
+$h(t) = \lim_{\Delta t \to 0} \frac{P[t \le T \le t + \Delta t | T \ge t]}{\Delta t}$
+
+The hazard function has the following properties:
+
++ $h(t)$ is a non negative function 
+
++ Increasing hazards imply some sort of aging effect
+
++ Those familiar with calculus may notice the similarity between the hazard rule and the definition of a derivative. The hazard rate approximates how the chance of experiencing an event changes with time, so it can be thought of as a slope.
+
++ If T is a continuous random variable, then $h(t) = f(t)/S(t) = -\frac{d (ln[S(t)])}{dt}$. This can be simplified to $-\frac{1}{S(t)} \times \frac{dS(t)}{dt}$
 
 ### The Cumulative Hazard function $H(t)$
 
+The cumulative hazard function is the integral of our hazard function, $h(t)$. It describes the accumulated risk up to a time point $t$.
+
+The cumulative hazard function has the following properties:
+
++ $H(t) = \int_{0}^t h(x)dx = -ln[S(t)]$, or alternatively, $S(t) = e^{-H(t)}$
+
 ### The Probability Density/Mass function $f(t)$
 
+The probability Density/Mass function (pdf or pmf for short) denote the unconditional probability of an event occurring at time $t_k$. If the distribution is assumed to take a parametric form, then the pdf will follow the specified distribution. These are explained in the parametric section.
+
 ### Know one? You Know them all!
+
+As you may have noticed, all of these functions have properties that relate them to each other. As a result, if we know one, we can use it to derive the other three. As practice, try and see if you can solve for the properties listed above.
 
 
 ## Censoring
 
 When working with any statistical method, missing data will usually be a common issue. Because we don\'t have unlimited resources, studies can typically only last a certain amount of time. Therefore, it is fairly common for an event to not be observed during the duration of the study. In the context of survival, we refer to this missing data problem as **censoring**.
+
+Each observation will have a $\delta_i$ value. If $\delta_i$ = 0, the observation is censored. If $\delta_i$ = 1, the event was observed.
 
 We can consider a few different types of censoring
 
@@ -69,16 +113,73 @@ Right censoring occurs when the subject does not experience the event of interes
 This doesn\'t mean the event will never occur. For example, consider a ten-year study on the time until death for subjects who receive a kidney transplant. Death is essentially guaranteed for all participants, but some subjects may have live longer than ten years from when the study begins. We can further break down right censoring into two types:
 
 + Type I Right Censoring
+    + Event must occur before a predetermined or fixed time. This be the case in a study with a fixed amount of time that the participants are tracked.
 
 + Type II Right Censoring
-
+    + The study continues until the first $k$ individuals experience the event. All other subjects would then be Type II censored.
 
 ### Left Censoring 
+
+Left censoring occurs when the event of interest occurs before the start of the study. For example, imagine we are interested in testing the time-to-event of new college graduates finding a job. Left-censored subjects would have a job before they actually graduate.
 
 
 ### Interval Censoring
 
+This type of censoring occurs when the exact time of an event is not known, but it can be pinpointed to an interval. This is very common in clinical trials that have periodic follow ups. For example, if a study interested in the development of cancer found that a subject developed cancer since their last checkup, we only know that the checkup occurred sometime before the current checkup but after the last one.
+
+
+### Effects on Likelihood
+
+Because we treat censored data as incomplete data, we need to keep this in mind when constructing our likelihood function. Assuming lifetimes and censoring are independent: 
+
++ If we have the exact time point that an event occurs (uncensored observations), then it provides information on the probability off an event occurring. This relates to our density function $f(t)$. 
+
++ If we have right-censored data, then this provides information that says the event time is larger than whatever time the observation became censored. This relates to the Survival function $S(C_r)$
+
++ If we have left-censored data, then we know the event occurred, so we can contribute it to the cumulative distribution $1 - S(C_L)$
+
++ If we have interval-censored data, we know the event occurred within an interval. So we know the probability that the event occurred in the interval [$S(L) - S(R)$].
+
+
 
 ## Parametric Models
 
-## Non-Parametric Models
+If we believe our data follows some sort of trend or distribution, we can impose a form and use a *parametric model* to estimate all of our four important functions. Here, we will detail a few of the more common parametric models and their derived results. 
+
+### The Exponential function
+
+If we believe our data is exponentially distributed, we can impose this form. The most prominent feature here is that the hazard rate is constant. This is known as the \"lack of memory principle,\" and implies that risk does not change over time. The exponential distribution can be used if there is sufficient reasoning or evidence to suggest this is the case.
+
+#### Derivations:
+
++ PDF: $\lambda e^{-\lambda t}$
++ Survival: $S(t) = e^{-\lambda t}$
++ Hazard Rate: $h(t) = \lambda$
++ Mean and Standard Deviation: $\frac{1}{\lambda}$
+
+### The Weibull Distribution
+
+The Weibull distribution contains both a shape ($\lambda$) and scale ($\alpha$) parameter.
+
+#### Derivations:
+
++ PDF: $\alpha \lambda t^{\alpha-1}exp(-\lambda t^\alpha)$
++ Survival: $S(t) = exp(-\lambda t^\alpha), t > 0$
++ Hazard Rate: $h(t) = \alpha \lambda t^{\alpha -1}$
++ Mean: $\frac{ \Gamma(1 + \frac{1}{\alpha}) }{\lambda^{\alpha^{-1}}}$
+
+### Estimating with Maximum Likelihood 
+
+## Non-Parametric Models: Kaplan-Meier
+
+
+
+
+
+
+
+
+
+
+
+
