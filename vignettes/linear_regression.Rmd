@@ -29,7 +29,7 @@ access_tutorial("R_SLR")
 
 ## Available Tutorials 
 
-*The following are tutorials on linear regression.*
+*The following tutorials on linear regression are available.*
 
 ### Simple Linear Regression (R_SLR)
 
